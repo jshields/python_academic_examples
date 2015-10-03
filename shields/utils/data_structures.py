@@ -127,7 +127,7 @@ class DoubleLinkedList(LinkedList):
 	def previous:
 		pass
 
-
+# pip install bintrees - would provide a preferred implementation
 class BinaryTree(Collection):
 	class Node:
 		@classmethod
@@ -144,17 +144,45 @@ class BinaryTree(Collection):
 
 	@classmethod
 	def __init__(root):
-		self.root = root
+		# self.Node or just Node?
+		if type(root) is not self.Node:
+			# raise
+			pass
+		elif root.parent_node is not None:
+			# root cannot have a parent
+			# raise
+			pass
+		else:
+			self.root = root
 
 	@classmethod
 	def __str__:
 		pass
 
 	@classmethod
+	def add(child, position):
+		n = Node(contents=child)
+
+	@classmethod
+	def remove(child_id):
+		pass
+
+	@classmethod
+	def find(child):
+		pass
+
+	@classmethod
+	def traverse(starting_node=self.root):
+		# recursively follow branches
+
+		pass
+
+	@classmethod
 	def max_depth:
 		pass
 	@classmethod
-	def total_nodes:
+	def total:
+		# return the total number of children plus the top parent
 		pass
 
 
