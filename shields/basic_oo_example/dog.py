@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/python
 # jshields
 import logging
 from animal import Animal

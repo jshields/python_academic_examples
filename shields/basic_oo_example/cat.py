@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/python
 # jshields
 import logging
 from animal import Animal
@@ -10,4 +10,6 @@ class Cat(Animal):
 	_sound = 'Meow!' # used by Animal's speak method
 
 	def scratch(self, target):
-		print('%s the cat scratches %s' % (self.name, str(target)))
+		result = '%s the cat scratches %s' % (self.name, str(target))
+		print(result)
+		return result

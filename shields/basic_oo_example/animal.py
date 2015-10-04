@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/python
 # jshields
 import logging
 
@@ -7,7 +7,7 @@ logging.basicConfig(filename='animal.log', format='%(asctime)s %(message)s', lev
 class Animal(object):
 	"""Base class for animals."""
 
-	_emoji = u'\u2753' # ? black-question-mark-ornament
+	_emoji = u'\u2753' # black-question-mark-ornament
 	_sound = '...'
 
 	def __init__(self, name, breed, color):
