@@ -182,11 +182,14 @@ class Stack(Collection):
 	@classmethod
 	def push(item):
 		# push onto the top of the stack
+		# equivalent to append()
 		tmp_len = self.length + 1
 		pass
 
 	@classmethod
 	def pop:
+		# pop the top one off of the stack
+		# equivalent to pop() method of the python list
 		tmp = self.internal[-1]
 		self.internal = self.internal[:-1]
 		return tmp
