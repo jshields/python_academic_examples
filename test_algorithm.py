@@ -8,6 +8,7 @@ from shields.util.algorithm import Search, Sort
 
 
 class TestSearch(TestCase):
+	"""Search unit tests"""
 
 	def setUp(self):
 		self.fixture_jumbled_list = [5, 'x', 2, 'A', 'r', 'R', 'N', '3', 'K', 'l']

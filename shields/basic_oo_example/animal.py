@@ -1,11 +1,12 @@
 #!/usr/bin/python
+"""animal module"""
 # jshields
 import logging
 
 logging.basicConfig(filename='animal.log', format='%(asctime)s %(message)s', level=logging.DEBUG)
 
 class Animal(object):
-	"""Base class for animals."""
+	"""Animal is the base class for animals."""
 
 	_emoji = u'\u2753' # black-question-mark-ornament
 	_sound = '...'
