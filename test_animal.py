@@ -103,7 +103,5 @@ class TestCat(TestCase):
 		scr = self.whiskers.scratch('the scratching post')
 		self.assertTrue(type(scr) is str)
 
-#testCat = unittest.TestLoader().loadTestsFromTestCase(TestCat)
-
 if __name__ == '__main__':
     unittest.main()

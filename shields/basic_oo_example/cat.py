@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # jshields
-import logging
 from animal import Animal
 
 class Cat(Animal):
