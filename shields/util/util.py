@@ -2,7 +2,7 @@
 import os, sys, io, math, logging, datetime
 
 
-class Utils(object):
+class Util(object):
 	def __init__(self):
 		pass
 

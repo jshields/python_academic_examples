@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/python
 #import 
 
 # Emulate the behaviour of lower level data structures in Python
