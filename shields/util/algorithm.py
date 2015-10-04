@@ -119,19 +119,15 @@ class Sort(object):
 		# and all elements greater than the pivot element are right of the pivot element, potentially unsorted
 		# return the pivot index, so that the less than and greater than sides can be partitioned and sorted again,
 		# in Sort._quick
+		logging.debug('pivot is %s' % right)
 		return right
 
 	@classmethod
-	def _quick(cls, lst, start=0, end=None):
+	def _quick(cls, lst, start, end):
 		"""Quicksort implementation for a list, internal"""
 		# this method is called recursively
 		# on the left and right sections of each partition
 		# the sorting work is done in _quicksort_partition
-
-		# a reasonable default is to sort all the way to the end of the list
-		# if this method is called from outside itself
-		if end is None:
-			end = (len(lst) - 1)
 
 		# eventually, a recursion depth will be reached
 		# at which the overall list is fully sorted
@@ -143,19 +139,24 @@ class Sort(object):
 		return lst
 
 	@classmethod
-	def quick(cls, src_lst, inline=False):
+	def quick(cls, src_lst, start=0, end=None, inline=False):
 		"""
 		Quicksort implementation for a list, external.
 		Specify if inline sorting should be used with Boolean kwarg 'inline'
 		"""
 		# user specified kwargs take effect in this top level call
 		# this way, recursive calls in the internals are not affected by user kwargs
+
+		# by default sort all the way to the end of the list
+		if end is None:
+			end = (len(src_lst) - 1)
+
 		# support for inline sorting vs returning a sorted copy:
 		if inline:
 			lst = src_lst
 		else:
 			lst = copy.deepcopy(src_lst)
-		return cls._quick(lst)
+		return cls._quick(lst, start, end)
 
 	@classmethod
 	def merge(cls, lst):
@@ -168,6 +169,7 @@ class Sort(object):
 		swapping = True
 		while swapping:
 			swapping = False
+			# because we look-ahead by 1 index, only iterate to length - 1
 			for i in range(len(lst) - 1):
 				# bigger/greater items should "bubble" to the top
 				# if one item belongs where the other is,
@@ -178,4 +180,34 @@ class Sort(object):
 					tmp = lst[i]
 					lst[i] = lst[i+1]
 					lst[i+1] = tmp
+		return lst
+
+	@classmethod
+	def insertion(cls, src_lst, start=0, end=None, inline=False):
+		"""Insertion sort implementation"""
+		# support for inline sorting vs returning a sorted copy:
+		if inline:
+			lst = src_lst
+		else:
+			lst = copy.deepcopy(src_lst)
+
+		if end is None:
+			end = len(lst)
+
+		# because we look-behind by 1 index, start iteration at length + 1
+		for i in range(start + 1, end):
+			value = lst[i]
+			cursor = i - 1
+			# while the elements behind the current element are of greater value,
+			# push the current element backwards
+			while lst[cursor] > value and cursor > 0:
+				# starting from the element of current 'value',
+				# swap values with the element that the cursor is looking back towards,
+				# falling through the rest of the list behind the current element
+				lst[cursor + 1] = lst[cursor]
+				cursor -= 1
+			# finally, insert the 'value' back into the list,
+			#
+			lst[cursor + 1] = value
+
 		return lst
