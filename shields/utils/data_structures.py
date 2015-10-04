@@ -27,7 +27,10 @@ class InfoPacket:
 
 class Collection:
 	@classmethod
-	def __init__(starting_collection=[], type_enforce=None):
+	def __init__(collection=None, type_enforce=None):
+		if collection is None:
+			collection = []
+
 		self.internal = starting_collection
 
 		# isinstance() may be preferable over type() for this
@@ -76,7 +79,9 @@ class Collection:
 	# this should be broken into multiple implementations
 	class Node:
 		@classmethod
-		def __init__(link_style=None, contents=None, left=None, right=None, parent=None, linked_nodes=[]):
+		def __init__(link_style=None, contents=None, left=None, right=None, parent=None, linked_nodes=None):
+			if linked_nodes is None:
+				linked_nodes = []
 			pass
 
 
