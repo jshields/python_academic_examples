@@ -7,8 +7,8 @@ Python has most of this stuff built in already.
 # jshields
 
 class InfoPacket(object):
-	@classmethod
-	def __init__(value=None):
+
+	def __init__(self, value=None):
 		self.value = value
 
 	@property
@@ -27,8 +27,8 @@ class InfoPacket(object):
 
 
 class Collection(object):
-	@classmethod
-	def __init__(collection=None, type_enforce=None):
+
+	def __init__(self, collection=None, type_enforce=None):
 		if collection is None:
 			collection = []
 
@@ -56,16 +56,14 @@ class Collection(object):
 
 				
 
-	@classmethod
-	def __str__:
-		return "Collection (%s)" % (self.internal)
+	def __str__(self):
+		return "<Collection (%s)>" % (self._items)
 
 	@classmethod
-	def length:
-		return len(self.internal)
+	def length(self):
+		return len(self._items)
 	"""
-	@classmethod
-	def length:
+	def length(self):
 		# count how many nodes are in the list
 		length = 1 # include head in length
 		tmp = self.head
@@ -74,37 +72,25 @@ class Collection(object):
 			tmp.next()
 		# return length of list
 		return length
-		#pass
 	"""
 
 	# this should be broken into multiple implementations
 	class Node(object):
-		@classmethod
-		def __init__(link_style=None, contents=None, left=None, right=None, parent=None, linked_nodes=None):
+		def __init__(self, link_style=None, contents=None, left=None, right=None, parent=None, linked_nodes=None):
 			if linked_nodes is None:
 				linked_nodes = []
 			pass
 
 
-
-
 class LinkedList(Collection):
 	# Linked List - Single
 	class Node:
-		@classmethod
 		def __init__(contents, next=None):
 			pass
 
-	@classmethod
-	def __init__(head):
+	def __init__(self, head):
 		self.head = head
-		#pass
 
-	@classmethod
-	def __str__:
-		pass
-
-	@classmethod
 	def next:
 		# go to next node
 		pass
@@ -114,106 +100,99 @@ class LinkedList(Collection):
 # Double should implement 'previous' method
 class DoubleLinkedList(LinkedList):
 	class Node:
-		@classmethod
 		def __init__(contents=None, left=None, right=None):
 			pass
 
 	# DoubleLinkedList methods
-	@classmethod
-	def __init__:
+	def __init__(self):
 		pass
 
-	@classmethod
-	def previous:
+	def previous(self):
 		pass
 
 # pip install bintrees - would provide a preferred implementation
 class BinaryTree(Collection):
 	class Node:
-		@classmethod
-		def __init__(contents=None, left=None, right=None, parent=None):
+		def __init__(self, contents=None, left=None, right=None, parent=None):
 			pass
 
-	@classmethod
-	def __init__(root):
+
+	def __init__(self, root):
 			# store the root node with its starting contents
 			self.root = Node(root)
 
-	@classmethod
-	def __str__:
-		pass
 
-	@classmethod
-	def add(child):
+
+	def add(self, child):
 		if child.value < parent.value
 		n = Node(contents=child)
 
-	@classmethod
-	def remove(child_id):
+
+	def remove(self, child_id):
 		pass
 
-	@classmethod
-	def find(child):
+
+	def find(self, child):
 		pass
 
-	@classmethod
-	def traverse(starting=self.root):
+	def traverse(self, starting=self.root):
 		# recursively follow branches
-
 		pass
 
-	@classmethod
-	def max_depth:
-		pass
-	@classmethod
-	def total:
+	@property
+	def max_depth(self):
+		#deepest = 0
+		#for
+	    #return deepest
+	
+
+	def total(self):
 		# return the total number of children plus the top parent
 		pass
 
 
 # LIFO
 class Stack(Collection):
-	@classmethod
-	def __init__(max_size=None):
-		pass
+	"""Stack data structure implementation"""
+
+	def __init__(self, max_size=None):
+		self.max_size = max_size
+		self.
 
 	# length method of parent should work
-	#
 
-	@classmethod
-	def push(item):
+	def push(self, item):
 		# push onto the top of the stack
 		# equivalent to append()
-		tmp_len = self.length + 1
 		pass
 
-	@classmethod
-	def pop:
+	def pop(self):
 		# pop the top one off of the stack
 		# equivalent to pop() method of the python list
-		tmp = self.internal[-1]
-		self.internal = self.internal[:-1]
+		tmp = self._items[-1]
+		self.internal = self._items[:-1]
 		return tmp
 
-	@classmethod
-	def peek:
-		tmp = self.internal[-1]
+	def peek(self):
+		tmp = self._items[-1]
 		return tmp
 
 
 # collections.deque is preferred
 # FIFO
 class Queue(Collection):
-	@classmethod
-	def __init__(max_size=None):
+	
+	def __init__(self, max_size=None):
 		pass
 
-	@classmethod
-	def enqueue(item):
+	def enqueue(self, item):
 		# put the item at the back of the queue
 		#tmp = [item]
 		# shift over by one to make room
 		#for i in self.internal:
 		#	tmp[i+1] = self.internal[i] # nope: out of range
 		#self.internal = tmp
+		pass
+
+	def dequeue(self, item):
 		pass
