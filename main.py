@@ -12,13 +12,13 @@ from shields.utils.web import Web
 
 # log to a file, with timestamps, including all log levels
 logging.basicConfig(filename='utils.log', format='%(asctime)s %(message)s', level=logging.DEBUG)
-"""
-DEBUG	
-INFO	
-WARNING	
-ERROR	
-CRITICAL
-"""
+#->DEBUG	
+#INFO	
+#WARNING	
+#ERROR	
+#CRITICAL
+
+
 logging.info("Main started.");
 
 
