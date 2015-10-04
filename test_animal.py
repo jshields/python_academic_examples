@@ -17,7 +17,7 @@ class TestAnimal(TestCase):
 		self.bigfoot = Animal('Bigfoot', 'unknown', 'brown')
 
 	def tearDown(self):
-		self.bigfoot = None
+		del self.bigfoot
 
 	def test_stringRepresentations(self):
 		# repr and str are qualitatively different
@@ -43,7 +43,7 @@ class TestDog(TestCase):
 		self.rover = Dog('Rover', 'Great Dane', 'grey')
 
 	def tearDown(self):
-		self.rover = None
+		del self.rover
 
 	def test_stringRepresentations(self):
 		# repr and str are qualitatively different
@@ -74,7 +74,7 @@ class TestCat(TestCase):
 		self.whiskers = Cat('Whiskers', 'Tabby', 'orange')
 
 	def tearDown(self):
-		self.whiskers = None
+		del self.whiskers
 
 	def test_stringRepresentations(self):
 		# repr and str are qualitatively different

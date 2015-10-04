@@ -1,9 +1,10 @@
 #!/usr/bin/python
-#import 
-
-# Emulate the behaviour of lower level data structures in Python
-# For personal educational purposes only
-# Python has most of this stuff built in already
+"""
+Emulate the behaviour of lower level data structures, in Python.
+For personal educational purposes only.
+Python has most of this stuff built in already.
+"""
+# jshields
 
 class InfoPacket(object):
 	@classmethod
