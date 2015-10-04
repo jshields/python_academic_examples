@@ -5,6 +5,26 @@
 # For personal educational purposes only
 # Python has most of this stuff built in already
 
+class InfoPacket:
+	@classmethod
+	def __init__(value=None):
+		self.value = value
+
+	@property
+	def value(self):
+		return self._value
+
+	@value.setter
+	def value(self, val):
+		self._value = val
+
+	@value.deleter
+	def value(self):
+		del self._value
+
+
+
+
 class Collection:
 	@classmethod
 	def __init__(starting_collection=[], type_enforce=None):
@@ -45,7 +65,7 @@ class Collection:
 		# count how many nodes are in the list
 		length = 1 # include head in length
 		tmp = self.head
-		while tmp.next_node is not None
+		while tmp.next is not None
 			length+=1
 			tmp.next()
 		# return length of list
@@ -56,15 +76,7 @@ class Collection:
 	# this should be broken into multiple implementations
 	class Node:
 		@classmethod
-		def __init__(link_style=None, contents=None, left_node=None, right_node=None, parent_node=None, linked_nodes=[]):
-			#if link_style not in link_styles:
-			#	raise InvalidNodeLink
-			#self.link_style = link_style
-			#self.contents = contents
-			#self.left_node = left_node
-			#self.right_node = right_node
-			#self.parent_node = parent_node
-			#self.linked_nodes = linked_nodes
+		def __init__(link_style=None, contents=None, left=None, right=None, parent=None, linked_nodes=[]):
 			pass
 
 
@@ -74,13 +86,7 @@ class LinkedList(Collection):
 	# Linked List - Single
 	class Node:
 		@classmethod
-		def __init__(contents, right_node=None):
-			#if link_style not in link_styles:
-			#	raise InvalidNodeLink
-			#self.link_style = link_style
-			#self.contents = contents
-			#self.left_node = left_node
-			#self.right_node = right_node
+		def __init__(contents, next=None):
 			pass
 
 	@classmethod
@@ -90,12 +96,6 @@ class LinkedList(Collection):
 
 	@classmethod
 	def __str__:
-		pass
-
-	def assemble_from_python_list(lst):
-		#ll = LinkedList()
-		#for node_candidate in lst:
-		#	n = Node(contents=node_candidate, next_node=)
 		pass
 
 	@classmethod
@@ -109,13 +109,7 @@ class LinkedList(Collection):
 class DoubleLinkedList(LinkedList):
 	class Node:
 		@classmethod
-		def __init__(contents=None, left_node=None, right_node=None):
-			#if link_style not in link_styles:
-			#	raise InvalidNodeLink
-			#self.link_style = link_style
-			#self.contents = contents
-			#self.left_node = left_node
-			#self.right_node = right_node
+		def __init__(contents=None, left=None, right=None):
 			pass
 
 	# DoubleLinkedList methods
@@ -131,36 +125,21 @@ class DoubleLinkedList(LinkedList):
 class BinaryTree(Collection):
 	class Node:
 		@classmethod
-		def __init__(contents=None, left_node=None, right_node=None, parent_node=None):
-			#if link_style not in link_styles:
-			#	raise InvalidNodeLink
-			#self.link_style = link_style
-			#self.contents = contents
-			#self.left_node = left_node
-			#self.right_node = right_node
-			#self.parent_node = parent_node
-			#self.linked_nodes = linked_nodes
+		def __init__(contents=None, left=None, right=None, parent=None):
 			pass
 
 	@classmethod
 	def __init__(root):
-		# self.Node or just Node?
-		if type(root) is not self.Node:
-			# raise
-			pass
-		elif root.parent_node is not None:
-			# root cannot have a parent
-			# raise
-			pass
-		else:
-			self.root = root
+			# store the root node with its starting contents
+			self.root = Node(root)
 
 	@classmethod
 	def __str__:
 		pass
 
 	@classmethod
-	def add(child, position):
+	def add(child):
+		if child.value < parent.value
 		n = Node(contents=child)
 
 	@classmethod
@@ -172,7 +151,7 @@ class BinaryTree(Collection):
 		pass
 
 	@classmethod
-	def traverse(starting_node=self.root):
+	def traverse(starting=self.root):
 		# recursively follow branches
 
 		pass
@@ -192,17 +171,25 @@ class Stack(Collection):
 	def __init__(max_size=None):
 		pass
 
+	# length method of parent should work
+	#
+
 	@classmethod
 	def push(item):
+		# push onto the top of the stack
+		tmp_len = self.length + 1
 		pass
 
 	@classmethod
 	def pop:
-		pass
+		tmp = self.internal[-1]
+		self.internal = self.internal[:-1]
+		return tmp
 
 	@classmethod
 	def peek:
-		pass
+		tmp = self.internal[-1]
+		return tmp
 
 
 # collections.deque is preferred
@@ -210,4 +197,14 @@ class Stack(Collection):
 class Queue(Collection):
 	@classmethod
 	def __init__(max_size=None):
+		pass
+
+	@classmethod
+	def enqueue(item):
+		# put the item at the back of the queue
+		#tmp = [item]
+		# shift over by one to make room
+		#for i in self.internal:
+		#	tmp[i+1] = self.internal[i] # nope: out of range
+		#self.internal = tmp
 		pass
