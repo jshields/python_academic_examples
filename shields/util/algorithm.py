@@ -9,17 +9,37 @@ class SearchException(Exception):
 
 class Sort(object):
 
-	def __init__(self):
+	@classmethod
+	def quick(cls, lst):
+		"""Quicksort implementation"""
 		pass
 
-	def bubble(self):
+	@classmethod
+	def merge(cls, lst):
+		"""Merge sort implementation"""
 		pass
-		# bubble sort
+
+	@classmethod
+	def bubble(cls, lst):
+		"""Bubble sort implementation"""
+		swapping = True
+		while swapping:
+			swapping = False
+			for i in range(len(lst) - 1):
+				# bigger/greater items should "bubble" to the top
+				# if one item belongs where the other is,
+				# swap them as part of the sort
+				if lst[i] > lst[i+1]:
+					swapping = True
+					# swap the items
+					tmp = lst[i]
+					lst[i] = lst[i+1]
+					lst[i+1] = tmp
+		return lst
+
 
 class Search(object):
 	"""Search algorithms"""
-	def __init__(self):
-		pass
 
 	@classmethod
 	def linear(cls, item, lst):
