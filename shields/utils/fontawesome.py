@@ -8,7 +8,7 @@ import codecs
 
 #TODO
 
-class FontAwesome(Animal):
+class FontAwesome(object):
 	__init__:
 		pass
 

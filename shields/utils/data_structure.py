@@ -5,7 +5,7 @@
 # For personal educational purposes only
 # Python has most of this stuff built in already
 
-class InfoPacket:
+class InfoPacket(object):
 	@classmethod
 	def __init__(value=None):
 		self.value = value
@@ -25,7 +25,7 @@ class InfoPacket:
 
 
 
-class Collection:
+class Collection(object):
 	@classmethod
 	def __init__(collection=None, type_enforce=None):
 		if collection is None:
@@ -77,7 +77,7 @@ class Collection:
 	"""
 
 	# this should be broken into multiple implementations
-	class Node:
+	class Node(object):
 		@classmethod
 		def __init__(link_style=None, contents=None, left=None, right=None, parent=None, linked_nodes=None):
 			if linked_nodes is None:

@@ -4,7 +4,7 @@ import logging
 
 logging.basicConfig(filename='animal.log', format='%(asctime)s %(message)s', level=logging.DEBUG)
 
-class Animal():
+class Animal(object):
 	def __init__(self):
 		self.species = None
 		self.name = None
