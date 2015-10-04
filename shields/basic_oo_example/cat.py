@@ -6,9 +6,8 @@ from animal import Animal
 class Cat(Animal):
 	"""Cat class, child of Animal"""
 
-	_species = u'feline'
-	_emoji = ur'\u1F431' # cat-face
+	_emoji = u'\U0001F431' # cat-face
+	_sound = 'Meow!' # used by Animal's speak method
 
-	def speak(self):
-		"""Cat override for Animal.speak"""
-		return 'Meow!'
+	def scratch(self, target):
+		print('%s the cat scratches %s' % (self.name, str(target)))

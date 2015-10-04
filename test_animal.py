@@ -21,4 +21,11 @@ whiskers = Cat('Whiskers', 'Tabby', 'orange')
 zoo.append(whiskers)
 
 for a in zoo:
-	print(a)
+	print(repr(a))
+	a.speak()
+	print(a.__class__.emoji())
+
+bigfoot.name = 'Sasquatch'
+print(bigfoot)
+
+whiskers.scratch(bigfoot)

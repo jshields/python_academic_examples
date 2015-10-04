@@ -20,5 +20,3 @@ logging.basicConfig(filename='utils.log', format='%(asctime)s %(message)s', leve
 
 
 logging.info("Main started.");
-
-
