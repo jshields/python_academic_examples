@@ -3,6 +3,7 @@
 # jshields
 
 import logging
+import copy
 
 logging.basicConfig(filename='algorithm.log', format='%(asctime)s %(message)s', level=logging.DEBUG)
 
@@ -73,8 +74,9 @@ class Search(object):
 class Sort(object):
 	"""Sort class acts as a library for sorting algorithm methods"""
 
-	def _quicksort_partition(lst, start, end):
-		"""Internal partition and sorting method for Sort.quick driver method"""
+	@classmethod
+	def _quicksort_partition(cls, lst, start, end):
+		"""Internal partition and sorting method for Sort._quick driver method"""
 		# the pivot element value will be the basis for comparison in sorting
 		# we use the first item in this partition of the list as the pivot
 		# the selection is arbitrary and the value could be anything, low or high
@@ -90,7 +92,7 @@ class Sort(object):
 
 		# keep swapping until the brackets pass/overlap each other
 		swapping = True
-		while not done:
+		while swapping:
 			# relative to the pivot value,
 			# left bracket moves from left to right, and will trip on any element with a value not less than,
 			# right bracket moves from right to left, and will trip on any element with a value not greater than
@@ -102,26 +104,26 @@ class Sort(object):
 				swapping = False
 			else:
 				# swap places if the bracket trips
-				console.log.debug('swapping: %s with %s' % (lst[left], lst[right]))
+				logging.debug('swapping: %s with %s' % (lst[left], lst[right]))
 				tmp=lst[left]
 				lst[left]=lst[right]
 				lst[right]=tmp
 		# swap pivot with the last known right bracket (greater than) element
 		# this puts the pivot in between the elements that were swapped to the "less than" position
 		# and elements that were swapped to the "greater than" position
-		console.log.debug('final swap: %s with %s' % (lst[start], lst[right]))
+		logging.debug('final swap: %s with %s' % (lst[start], lst[right]))
 		tmp=lst[start]
 		lst[start]=lst[right]
 		lst[right]=tmp
 		# the end result is that all elements less than are left of the pivot element, potentially unsorted
 		# and all elements greater than the pivot element are right of the pivot element, potentially unsorted
 		# return the pivot index, so that the less than and greater than sides can be partitioned and sorted again,
-		# in Sort.quick
+		# in Sort._quick
 		return right
 
 	@classmethod
-	def quick(cls, lst, start=0, end=None):
-		"""Quicksort implementation for a list"""
+	def _quick(cls, lst, start=0, end=None):
+		"""Quicksort implementation for a list, internal"""
 		# this method is called recursively
 		# on the left and right sections of each partition
 		# the sorting work is done in _quicksort_partition
@@ -136,9 +138,24 @@ class Sort(object):
 		if start < end:
 			# sort before and after the pivot
 			pivot_index = cls._quicksort_partition(lst, start, end)
-			cls.quick(lst, start, pivot_index-1)
-			cls.quick(lst, pivot_index+1, end)
+			cls._quick(lst, start, pivot_index-1)
+			cls._quick(lst, pivot_index+1, end)
 		return lst
+
+	@classmethod
+	def quick(cls, src_lst, inline=False):
+		"""
+		Quicksort implementation for a list, external.
+		Specify if inline sorting should be used with Boolean kwarg 'inline'
+		"""
+		# user specified kwargs take effect in this top level call
+		# this way, recursive calls in the internals are not affected by user kwargs
+		# support for inline sorting vs returning a sorted copy:
+		if inline:
+			lst = src_lst
+		else:
+			lst = copy.deepcopy(src_lst)
+		return cls._quick(lst)
 
 	@classmethod
 	def merge(cls, lst):
