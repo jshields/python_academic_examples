@@ -124,7 +124,7 @@ class Sort(object):
 
 	@classmethod
 	def _quick(cls, lst, start, end):
-		"""Quicksort implementation for a list, internal"""
+		"""Quicksort implementation for a list, internal method"""
 		# this method is called recursively
 		# on the left and right sections of each partition
 		# the sorting work is done in _quicksort_partition
@@ -140,10 +140,7 @@ class Sort(object):
 
 	@classmethod
 	def quick(cls, src_lst, start=0, end=None, inline=False):
-		"""
-		Quicksort implementation for a list, external.
-		Specify if inline sorting should be used with Boolean kwarg 'inline'
-		"""
+		"""Quicksort implementation"""
 		# user specified kwargs take effect in this top level call
 		# this way, recursive calls in the internals are not affected by user kwargs
 		# by default sort all the way to the end of the list

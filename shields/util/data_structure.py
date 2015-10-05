@@ -23,37 +23,17 @@ class InfoPacket(object):
 	def value(self):
 		del self._value
 
-
-
-
 class Collection(object):
 
-	def __init__(self, collection=None, type_enforce=None):
-		if collection is None:
-			collection = []
+	def __init__(self, items=None):
+		
+		if items is None:
+			items = []
 
-		self.internal = collection
+		if type(items) != list:
+			logging.warning('Non-list passed into Collection. May not function as intended.')
 
-		# isinstance() may be preferable over type() for this
-		if type_enforce is not None:
-			types = [int, str, unicode, 'char']
-			for item in collection:
-				tmp = type(item)
-
-				if tmp not in types:
-					if tmp is str:
-						if type_enforce is 'char' and len(tmp) not 1:
-							# String in Character collection
-							# Cannot enforce char type
-							#raise
-						else if type_enforce is int:
-							try:
-								item = int(item)
-							#raise Exception:
-
-					#raise
-					pass
-
+		self._items = items
 				
 
 	def __str__(self):
@@ -62,33 +42,43 @@ class Collection(object):
 	@classmethod
 	def length(self):
 		return len(self._items)
-	"""
-	def length(self):
-		# count how many nodes are in the list
-		length = 1 # include head in length
-		tmp = self.head
-		while tmp.next is not None
-			length+=1
-			tmp.next()
-		# return length of list
-		return length
-	"""
+	
+#	def length(self):
+#		# count how many nodes are in the list
+#		length = 1 # include head in length
+#		tmp = self.head
+#		while tmp.next is not None
+#			length+=1
+#			tmp.next()
+#		# return length of list
+#		return length
 
-	# this should be broken into multiple implementations
-	class Node(object):
-		def __init__(self, link_style=None, contents=None, left=None, right=None, parent=None, linked_nodes=None):
-			if linked_nodes is None:
-				linked_nodes = []
-			pass
+
+#	class Node(object):
+#		def __init__(self, link_style=None, value=None, left=None, right=None, parent=None, linked_nodes=None):
+#			if linked_nodes is None:
+#				linked_nodes = []
+#			pass
 
 
 class LinkedList(Collection):
 	# Linked List - Single
 	class Node:
-		def __init__(contents, next=None):
-			pass
+		def __init__(value, next_node=None):
+			# value could be anything, including an object
+			self.value = value
+			self.next_node = next_node
 
-	def __init__(self, head):
+	def __init__(self, items=None, head):
+		if items is None:
+			items = []
+
+		if type(items) != list:
+			logging.warning('Non-list passed into Collection. May not function as intended.')
+
+		self._items = items
+				
+
 		self.head = head
 
 	def next:
@@ -100,7 +90,7 @@ class LinkedList(Collection):
 # Double should implement 'previous' method
 class DoubleLinkedList(LinkedList):
 	class Node:
-		def __init__(contents=None, left=None, right=None):
+		def __init__(value=None, left=None, right=None):
 			pass
 
 	# DoubleLinkedList methods
@@ -113,19 +103,19 @@ class DoubleLinkedList(LinkedList):
 # pip install bintrees - would provide a preferred implementation
 class BinaryTree(Collection):
 	class Node:
-		def __init__(self, contents=None, left=None, right=None, parent=None):
+		def __init__(self, value=None, left=None, right=None, parent=None):
 			pass
 
 
 	def __init__(self, root):
-			# store the root node with its starting contents
+			# store the root node with its starting value
 			self.root = Node(root)
 
 
 
 	def add(self, child):
 		if child.value < parent.value
-		n = Node(contents=child)
+		n = Node(value=child)
 
 
 	def remove(self, child_id):
@@ -155,11 +145,11 @@ class BinaryTree(Collection):
 class Stack(Collection):
 	"""Stack data structure implementation"""
 
-	def __init__(self, max_size=None):
+	def __init__(self, items, max_size=None):
 		self.max_size = max_size
-		self.
+		
 
-	# length method of parent should work
+	# length method of parent class should work
 
 	def push(self, item):
 		# push onto the top of the stack
