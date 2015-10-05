@@ -104,14 +104,14 @@ class Sort(object):
 				swapping = False
 			else:
 				# swap places if the bracket trips
-				logging.debug('swapping: %s with %s' % (lst[left], lst[right]))
+				logging.debug('_quicksort_partition swapping: %s with %s' % (lst[left], lst[right]))
 				tmp=lst[left]
 				lst[left]=lst[right]
 				lst[right]=tmp
 		# swap pivot with the last known right bracket (greater than) element
 		# this puts the pivot in between the elements that were swapped to the "less than" position
 		# and elements that were swapped to the "greater than" position
-		logging.debug('final swap: %s with %s' % (lst[start], lst[right]))
+		logging.debug('_quicksort_partition final swap: %s with %s' % (lst[start], lst[right]))
 		tmp=lst[start]
 		lst[start]=lst[right]
 		lst[right]=tmp
@@ -146,12 +146,11 @@ class Sort(object):
 		"""
 		# user specified kwargs take effect in this top level call
 		# this way, recursive calls in the internals are not affected by user kwargs
-
 		# by default sort all the way to the end of the list
 		if end is None:
 			end = (len(src_lst) - 1)
 
-		# support for inline sorting vs returning a sorted copy:
+		# support for inline sorting vs returning a sorted copy
 		if inline:
 			lst = src_lst
 		else:
@@ -185,7 +184,7 @@ class Sort(object):
 	@classmethod
 	def insertion(cls, src_lst, start=0, end=None, inline=False):
 		"""Insertion sort implementation"""
-		# support for inline sorting vs returning a sorted copy:
+		# support for inline sorting vs returning a sorted copy
 		if inline:
 			lst = src_lst
 		else:
@@ -198,16 +197,23 @@ class Sort(object):
 		for i in range(start + 1, end):
 			value = lst[i]
 			cursor = i - 1
+
+			logging.debug('insertion: for looping, index at %d, current value %s, cursor at %d' %\
+																(i, value, cursor))
+
 			# while the elements behind the current element are of greater value,
 			# push the current element backwards
-			while lst[cursor] > value and cursor > 0:
+			while lst[cursor] > value and cursor >= 0:
 				# starting from the element of current 'value',
 				# swap values with the element that the cursor is looking back towards,
 				# falling through the rest of the list behind the current element
+				logging.debug('insertion: while looping, shifting index of %s up by one' % lst[cursor])
 				lst[cursor + 1] = lst[cursor]
 				cursor -= 1
-			# finally, insert the 'value' back into the list,
-			#
+				logging.debug('insertion: while looping, cursor at %d' % cursor)
+			# finally, insert the 'value' back into the list
+			logging.debug('insertion: out of while, inserting %s back into the list at index %d' %\
+																	(lst[cursor + 1], (cursor + 1)))
 			lst[cursor + 1] = value
 
 		return lst

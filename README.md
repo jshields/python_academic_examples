@@ -24,7 +24,7 @@ algorithms
 - Bubble Sort :white_check_mark:
 - Merge Sort :x:
 - Quicksort :white_check_mark:
-- Insertion Sort :warning:
+- Insertion Sort :white_check_mark:
 - Linear Search :white_check_mark:
 - Binary Search :white_check_mark:
 - associated unit tests :x:
