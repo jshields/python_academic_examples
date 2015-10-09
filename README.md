@@ -9,14 +9,14 @@ basic Object Oriented example
 - unit tests for the classes :x:
 
 datastructures (re-implemented even if they are in the standard library via List methods etc., just for fun)
-- Stack
-- Queue
-- LinkedList (single)
-- DoubleLinkedList
-- Binary Tree
+- Stack :x:
+- Queue :x:
+- LinkedList (single) :x:
+- DoubleLinkedList :x:
+- Binary Tree :x:
 
 algorithms
-- Bubble Sort
-- Merge Sort
-- Quicksort
-- Binary Search
+- Bubble Sort :x:
+- Merge Sort :x:
+- Quicksort :x:
+- Binary Search :x:
