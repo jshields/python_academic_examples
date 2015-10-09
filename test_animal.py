@@ -4,6 +4,10 @@
 import logging
 from shields.basic_oo_example.animal import Animal  #, Dog, Cat
 
+# Animal
 bigfoot = Animal("Bigfoot", "brown")
-
 print("Here is: %s" % bigfoot)
+
+# Dog
+rover = Dog("Rover", "Great Dane", "grey")
+print("Here is: %s" % rover)
