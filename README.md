@@ -4,7 +4,9 @@ Work in Progress
 ###Planned:
 
 basic Object Oriented example
-- Animal, Cat, Dog :x:
+- Animal :white_green_checkmark:
+- Cat :x:
+- Dog :x:
 - Unicdoe support and animal emoji methods :x:
 - unit tests for the classes :x:
 
