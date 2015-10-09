@@ -3,6 +3,11 @@ Work in Progress
 
 ###Planned:
 
+basic Object Oriented example
+- Animal, Cat, Dog :x:
+- Unicdoe support and animal emoji methods :x:
+- unit tests for the classes :x:
+
 datastructures (re-implemented even if they are in the standard library via List methods etc., just for fun)
 - Stack
 - Queue
@@ -15,6 +20,3 @@ algorithms
 - Merge Sort
 - Quicksort
 - Binary Search
-
-basic Object Oriented example
-- Animal, Cat, Dog
