@@ -4,7 +4,7 @@ Work in Progress
 ###Planned:
 
 basic Object Oriented example
-- Animal :white_green_checkmark:
+- Animal :white_check_mark:
 - Cat :x:
 - Dog :x:
 - Unicdoe support and animal emoji methods :x:
