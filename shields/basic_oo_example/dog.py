@@ -1,5 +1,6 @@
 #!/bin/python
 # jshields
+import logging
 from animal import Animal
 
 
@@ -9,8 +10,10 @@ class Dog(Animal):
 		self.name = name
 		self.breed = breed
 		self.color = color
-		# arbitrarily validating name as being valid unicode
-		# TODO decide whether or not to keep this
+		_emoji = ur'\u1F436' # dog-face
+
+		# arbitrarily (?) validating name as being valid unicode
+		# TODO decide whether or not to keep this... Maybe the classes should be Jinja compatible
 		#try:
 		#	self.name = unicode(name, 'utf_8', strict)
 		#except ValueError:
@@ -20,12 +23,8 @@ class Dog(Animal):
 		logging.info("%s initialized" % self)
 
 	def __str__(self):
-		return u'<Dog name=%s species=%s breed=%s color=%s emoji=%s >' % (self.name, self.species, self.breed, self.color, self.emoji())
+		return u'<Dog name=%s species=%s breed=%s color=%s emoji=%s >' % (self.name, self.species, self.breed, self.color, Dog.emoji())
 
-	@classmethod
-	def emoji:
-		# dog emoji
-		return ur'\u1F436'.encode('unicode_escape')
 
 
 

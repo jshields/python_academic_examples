@@ -2,7 +2,8 @@
 # jshields
 # this file does not currently contain "tests" for these classes, it just makes sure they kinda work
 import logging
-from shields.basic_oo_example.animal import Animal  #, Dog, Cat
+from shields.basic_oo_example.animal import Animal
+from shields.basic_oo_example.dog import Dog #, Cat
 
 # Animal
 bigfoot = Animal("Bigfoot", "brown")
