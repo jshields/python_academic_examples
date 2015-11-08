@@ -5,8 +5,8 @@ Work in Progress
 
 basic Object Oriented example
 - Animal :white_check_mark:
-- Cat :x:
-- Dog :x:
+- Cat :white_check_mark:
+- Dog :white_check_mark:
 - Unicdoe support and animal emoji methods :x:
 - unit tests for the classes :x:
 
