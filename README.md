@@ -1,5 +1,6 @@
 # python_utils
 Work in Progress
+Not meant for practical use; for educational purposes only.
 
 ###Planned:
 
