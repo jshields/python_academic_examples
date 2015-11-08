@@ -8,7 +8,7 @@ basic Object Oriented example
 - Cat :white_check_mark:
 - Dog :white_check_mark:
 - Unicdoe animal emoji methods :white_check_mark:
-- unit tests for the classes :x:
+- unit tests for the classes :white_check_mark:
 
 datastructures (re-implemented even if they are in the standard library via List methods etc., just for fun)
 - Stack :x:
