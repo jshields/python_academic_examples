@@ -21,4 +21,5 @@ algorithms
 - Bubble Sort :x:
 - Merge Sort :x:
 - Quicksort :x:
-- Binary Search :x:
+- Linear Search :white_check_mark:
+- Binary Search :white_check_mark:
