@@ -20,7 +20,7 @@ datastructures (re-implemented even if they are in the standard library via List
 - Binary Tree :x:
 
 algorithms
-- Bubble Sort :x:
+- Bubble Sort :white_check_mark:
 - Merge Sort :x:
 - Quicksort :x:
 - Linear Search :white_check_mark:
