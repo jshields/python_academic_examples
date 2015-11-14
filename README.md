@@ -22,6 +22,6 @@ datastructures (re-implemented even if they are in the standard library via List
 algorithms
 - Bubble Sort :white_check_mark:
 - Merge Sort :x:
-- Quicksort :x:
+- Quicksort :warning:
 - Linear Search :white_check_mark:
 - Binary Search :white_check_mark:
