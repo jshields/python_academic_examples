@@ -26,12 +26,12 @@ html = response.read()
 # create a subclass and override the handler methods
 class MyHTMLParser(HTMLParser):
 	"""Basic exampple of an HTMLParser subclass"""
-    def handle_starttag(self, tag, attrs):
-        print "Encountered a start tag:", tag
-    def handle_endtag(self, tag):
-        print "Encountered an end tag :", tag
-    def handle_data(self, data):
-        print "Encountered some data  :", data
+	def handle_starttag(self, tag, attrs):
+		print "Encountered a start tag:", tag
+	def handle_endtag(self, tag):
+		print "Encountered an end tag :", tag
+	def handle_data(self, data):
+		print "Encountered some data  :", data
 
 # instantiate the parser and feed it some HTML
 #parser = MyHTMLParser()
@@ -42,4 +42,14 @@ class MyHTMLParser(HTMLParser):
 session = requests.session()
 
 def get(url):
-    return session.get(url).json()
+	return session.get(url).json()
+
+resp = get('http://jsonplaceholder.typicode.com/posts/1')
+
+for i in resp:
+	print(i, resp[i])
+
+print(resp['title'])
+resp['title'] = 'Lorem Ipsum'
+print(resp['title'])
+
