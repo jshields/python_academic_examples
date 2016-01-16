@@ -78,15 +78,21 @@ class DoubleLinkedList(object):
 class BinaryTree(object):
     """Binary Tree"""
 
-    class BinaryTreeRootException(BaseException):
+    class BinaryTreeRootException(Exception):
         """Exception related to the root Node"""
         pass
 
-    class BinaryTreeNodeException(BaseException):
+    class BinaryTreeNodeException(Exception):
         """Exception related to a Node"""
-        pass
+        def __init__(self, message):
+            # super call the parent class constructor
+            super(BinaryTreeNodeException, self).__init__(message)
 
-    class Node:
+            # a preset message
+            self.insertErrorMsg = 'Attempted insertion of non-Node.'
+
+    # nested Node class for use in BinaryTree class
+    class Node(object):
         """Node for Binary Tree"""
         def __init__(self, parent=None, value=None, left=None, right=None):
             self._parent = parent
@@ -124,11 +130,11 @@ class BinaryTree(object):
 
         @left.setter
         def left(self, value):
-            """set value of the left Node"""
+            """set the left Node"""
             if isinstance(value, Node):
                 self._left = value
             else:
-                raise BinaryTreeNodeException('Attempted insertion of non-Node.')
+                raise BinaryTreeNodeException(BinaryTreeNodeException.insertErrorMsg)
 
         @property
         def right(self):
@@ -137,16 +143,25 @@ class BinaryTree(object):
 
         @right.setter
         def right(self, node_value):
-            """set value of the right Node"""
-            self._right = Node(node_value)
+            """set the right Node"""
+            if isinstance(value, Node):
+                self._right = value
+            else:
+                raise BinaryTreeNodeException(BinaryTreeNodeException.insertErrorMsg)
+
+        # end Node class
 
     def __init__(self, root=None):
         """initialize Binary Tree"""
+        # Node IDs
+        self._ids = []
         # a Binary Tree must have at minimum a single root Node
         if (not isinstance(root, Node)) and (root != None):
             raise BinaryTreeRootException('Invalid root. Must be a Node.')
         if root == None:
             self._root == Node()
+            # at index 0 insert 0
+            self._ids.insert(0, 0)
 
     def root(self):
         """get the root Node / head"""
@@ -161,11 +176,13 @@ class BinaryTree(object):
     def remove(self, child_id):
        pass
 
-    def find(self, child):
+    def find(self, node_value):
+        # find node(s) by value and return their IDs
        pass
 
     @property
     def depth(self):
+        pass
         #deepest = 0
         #for
         #return deepest
@@ -230,6 +247,12 @@ class Queue(Collection):
 def main():
     """for during development only"""
     print('starting smoke test')
+
+    import ipdb
+    ipdb.set_trace()
+
+    print(BinaryTree)
+    print(BinaryTree.Node)
 
     bintree = BinaryTree(root=Node('root node val'))
 
