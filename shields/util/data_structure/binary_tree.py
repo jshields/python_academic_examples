@@ -79,17 +79,15 @@ class BinaryTree(object):
 
     def __init__(self, root=None):
         """initialize Binary Tree"""
-        # Node IDs
+        # Node IDs sequence
         self._ids = []
         # a Binary Tree must have at minimum a single root Node
         if (not isinstance(root, Node)) and (root != None):
             raise BinaryTreeRootException('Invalid root. Must be a Node.')
         if root == None:
             self._root == Node()
-            # at index 0 insert 0
-
-            
-            self._ids.insert(0, 0)
+        else:
+            self._root = root
 
     def root(self):
         """get the root Node / head"""
@@ -104,9 +102,13 @@ class BinaryTree(object):
     def remove(self, child_id):
        pass
 
-    def find(self, node_value):
+    def find_nodes_by_value(self, node_value):
+        """find node ids with an exact match to a specific value"""
+        #found_nodes = []
         # find node(s) by value and return their IDs
-       pass
+        #found_nodes.append(id(found_node))
+        #return found_nodes
+        pass
 
     @property
     def depth(self):
