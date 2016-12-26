@@ -23,7 +23,7 @@ class BinaryTree(object):
         def __init__(self, parent=None, value=None, left=None, right=None):
             self._parent = parent
 
-            if self._parent == None:
+            if self._parent is None:
                 self._isrootlike = True
             else:
                 self._isrootlike = False
@@ -39,7 +39,7 @@ class BinaryTree(object):
         @parent.setter
         def parent(self, value):
 
-            if value == None:
+            if value is None:
                 self._isrootlike = True
             else:
                 self._isrootlike = False
@@ -47,7 +47,6 @@ class BinaryTree(object):
                     raise BinaryTreeRootException('Cannot set root to instance other than of type Node.')
 
             self._parent = value
-        
 
         @property
         def left(self):
@@ -82,9 +81,9 @@ class BinaryTree(object):
         # Node IDs sequence
         self._ids = []
         # a Binary Tree must have at minimum a single root Node
-        if (not isinstance(root, Node)) and (root != None):
+        if (not isinstance(root, Node)) and (root is not None):
             raise BinaryTreeRootException('Invalid root. Must be a Node.')
-        if root == None:
+        if root is None:
             self._root == Node()
         else:
             self._root = root
@@ -92,30 +91,28 @@ class BinaryTree(object):
     def root(self):
         """get the root Node / head"""
         return self._root
-        
 
     #   def add(self, child):
     #       if child.value < parent.value
     #       n = Node(value=child)
 
-
     def remove(self, child_id):
-       pass
+        pass
 
     def find_nodes_by_value(self, node_value):
         """find node ids with an exact match to a specific value"""
-        #found_nodes = []
+        # found_nodes = []
         # find node(s) by value and return their IDs
-        #found_nodes.append(id(found_node))
-        #return found_nodes
+        # found_nodes.append(id(found_node))
+        # return found_nodes
         pass
 
     @property
     def depth(self):
         pass
-        #deepest = 0
-        #for
-        #return deepest
+        # deepest = 0
+        # for
+        # return deepest
 
     def print_tree(self):
         """draw a visual representation of the tree"""

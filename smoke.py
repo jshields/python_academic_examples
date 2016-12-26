@@ -1,4 +1,5 @@
-from shields.util.data_structure.binary_tree import BinaryTree
+from python_utils.util.data_structure.binary_tree import BinaryTree
+
 
 def main():
     """for during development only"""
@@ -19,8 +20,6 @@ def main():
 
     root.left.left = Node('left left node val')
     root.left.right = Node('left right node val')
-
-
 
 
 if __name__ == '__main__':
