@@ -8,6 +8,7 @@ def ackermann(m, n):
     :type n: int
     :return: Ackermann answer for (m ,n)
     :rtype: int
+    :raises RecursionError: recursion may go too deep
     """
     if m == 0:
         return n + 1
