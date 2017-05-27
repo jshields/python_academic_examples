@@ -1,9 +1,9 @@
-# python_utils
+# python academic examples
 Work in Progress
 
 Not meant for practical use; for educational purposes only.
 
-###Completed:
+### Completed:
 basic Object Oriented example
 - Animal :white_check_mark:
 - Cat :white_check_mark:
@@ -11,7 +11,7 @@ basic Object Oriented example
 - Unicdoe animal emoji methods :white_check_mark:
 - associated unit tests :white_check_mark:
 
-###Planned:
+### Planned:
 datastructures (re-implemented even if they are in the standard library, just for fun)
 - Stack :x:
 - Queue :x:

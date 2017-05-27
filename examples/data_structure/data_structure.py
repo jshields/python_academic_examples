@@ -6,23 +6,6 @@ Python has most of this stuff built in already.
 """
 
 
-class InfoPacket(object):
-
-    def __init__(self, value=None):
-        self.value = value
-
-    @property
-    def value(self):
-        return self._value
-
-    @value.setter
-    def value(self, value):
-        self._value = value
-
-    @value.deleter
-    def value(self):
-        del self._value
-
 
 class LinkedList(object):
     """single Linked List data structure"""
@@ -41,7 +24,7 @@ class LinkedList(object):
             items = []
 
         if type(items) != list:
-            logging.warning('Non-list passed into Collection. May not function as intended.')
+            logging.warning('Non-list passed. May not function as intended.')
 
         self._items = items
         self.head = head
@@ -97,7 +80,7 @@ class Stack(Collection):
         return tmp
 
 
-# collections.deque is preferred
+# collections.deque is preferred in real world code
 # FIFO
 class Queue(Collection):
 
