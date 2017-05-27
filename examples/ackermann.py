@@ -4,8 +4,10 @@ https://en.wikipedia.org/wiki/Ackermann_function
 
 def ackermann(m, n):
     """
-    :param m: int
-    :param n: int
+    :type m: int
+    :type n: int
+    :return: Ackermann answer for (m ,n)
+    :rtype: int
     """
     if m == 0:
         return n + 1
