@@ -4,9 +4,9 @@
 import logging
 import unittest
 from unittest import TestCase
-from python_utils.basic_oo_example.animal import Animal
-from python_utils.basic_oo_example.dog import Dog
-from python_utils.basic_oo_example.cat import Cat
+from examples.basic_oo_example.animal import Animal
+from examples.basic_oo_example.dog import Dog
+from examples.basic_oo_example.cat import Cat
 
 
 class TestAnimal(TestCase):
@@ -17,7 +17,7 @@ class TestAnimal(TestCase):
         self.bigfoot = Animal('Bigfoot', 'unknown', 'brown')
 
     def tearDown(self):
-        del self.bigfoot
+        pass
 
     def test_stringRepresentations(self):
         # repr and str are qualitatively different
@@ -44,7 +44,7 @@ class TestDog(TestCase):
         self.rover = Dog('Rover', 'Great Dane', 'grey')
 
     def tearDown(self):
-        del self.rover
+        pass
 
     def test_stringRepresentations(self):
         # repr and str are qualitatively different
@@ -76,18 +76,22 @@ class TestCat(TestCase):
         self.whiskers = Cat('Whiskers', 'Tabby', 'orange')
 
     def tearDown(self):
-        del self.whiskers
+        pass
 
     def test_stringRepresentations(self):
         # repr and str are qualitatively different
         self.assertFalse(repr(self.whiskers) is str(self.whiskers))
         # but repr should still return something of type string
-        self.assertTrue(type(repr(self.whiskers)) is str)
+        self.assertTrue(
+            isinstance(repr(self.whiskers), basestring)
+        )
 
     def test_speak(self):
         # make sure a string returns on speak
         meow = self.whiskers.speak()
-        self.assertTrue(type(meow) is str)
+        self.assertTrue(
+            isinstance(meow, basestring)
+        )
 
     def test_emoji(self):
         # Cat's emoji should be the cat-face emoji
@@ -103,7 +107,9 @@ class TestCat(TestCase):
     def test_scratch(self):
         # make sure that the cat scratch method returns a string
         scr = self.whiskers.scratch('the scratching post')
-        self.assertTrue(type(scr) is str)
+        self.assertTrue(
+            isinstance(scr, basestring)
+        )
 
 
 if __name__ == '__main__':

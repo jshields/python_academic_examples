@@ -5,8 +5,7 @@ def main():
     """for during development only"""
     print('starting smoke test')
 
-    import ipdb
-    ipdb.set_trace()
+    import ipdb;ipdb.set_trace()
 
     print(BinaryTree)
     print(BinaryTree.Node)
