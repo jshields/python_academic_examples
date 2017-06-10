@@ -15,20 +15,21 @@ basic Object Oriented example
 - Unicdoe animal emoji methods :white_check_mark:
 - associated unit tests :white_check_mark:
 
-### Planned:
+### Planned / WIP:
 datastructures (re-implemented even if they are in the standard library, just for fun)
 - Stack :x:
 - Queue :x:
 - LinkedList (single) :x:
 - DoubleLinkedList :x:
 - Binary Tree :x:
-- associated unit tests :x:
 
 algorithms
-- Bubble Sort :white_check_mark:
-- Merge Sort :x:
-- Quicksort :x:
-- Insertion Sort :white_check_mark:
-- Linear Search :white_check_mark:
-- Binary Search :white_check_mark:
-- associated unit tests :x:
+- sort
+  - Bubble Sort :white_check_mark:
+  - Merge Sort :x:
+  - Quicksort (Hoare partition scheme) :white_check_mark:
+  - Quicksort (middle pivot) :x:
+  - Insertion Sort :white_check_mark:
+- search
+  - Linear Search :white_check_mark:
+  - Binary Search :white_check_mark:
