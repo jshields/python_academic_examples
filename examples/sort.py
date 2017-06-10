@@ -11,66 +11,81 @@ logging.basicConfig(filename='sort.log', format='%(asctime)s %(message)s', level
 class Sort(object):
     """Sort class acts as a library for sorting algorithm methods"""
 
+
+
+
+
+
+
+
+
     @classmethod
-    def _quicksort_partition(cls, lst, left, right):
+    def _quicksort_partition2(cls, lst, left, right):
         """
         Internal partition and sorting method for Sort._quick driver method
         :param int left: start of partition
         :param int right: end of partition
         """
-        # the pivot element value will be the basis for comparison in sorting
-        # we use the middle item in this partition of the list as the pivot,
-        # to avoid O(n^2) performance in some common scenarios
+        # The pivot element value will be the basis for comparison in sorting.
+        # We use the middle item in this partition of the list as the pivot,
+        # to avoid O(n^2) performance in some common scenarios.
         # More discussion here:
         # https://stackoverflow.com/questions/164163/quicksort-choosing-the-pivot
         # https://en.wikipedia.org/wiki/Quicksort#Choice_of_pivot
-        # "median of three" pivot selection is a good alternative
+        # "median of three" pivot selection is also good
 
-        # this is the pivot value
         pivot_index = left + right // 2
+        logging.debug('pivot index: %s' % pivot_index)
+
         pivot_value = lst[pivot_index]
-        logging.debug('pivot is %s' % pivot_value)
+        logging.debug('pivot value: %s' % pivot_value)
 
         # for now the pivot element remains in its initial list position,
         # and elements will be index swapped (their indices switch)
         # relative to the pivot value, not the pivot's index
 
-        # keep swapping until the brackets pass/overlap each other
         swapping = True
         while swapping:
+            init_left = left
+            init_right = right
             # with comparisons relative to the pivot,
-            # left bracket index moves from left to right, and will stop on any element with a value not less than pivot value,
-            # right bracket index moves from right to left, and will stop on any element with a value not greater than pivot value
-            # if both brackets stopped without passing through each other, then swap the elements they stopped on
+            # "left pointer" index moves from left to right, and will stop on any element with a value not less than pivot value,
+            # "right pointer" index moves from right to left, and will stop on any element with a value not greater than pivot value
+
+            # if both "pointers" stopped, then swap the elements they stopped on?
             while left < right and lst[left] <= pivot_value:
                 left = left + 1
             while right > left and lst[right] >= pivot_value:
                 right = right - 1
 
-            if right <= left:
-                # right reached left bracket, no values to swap were found
+
+            if right < left:  # stop condition?
                 swapping = False
             else:
-                # swap places if the brackets trip
+                # swap places if the "pointers" trip
                 logging.debug('_quicksort_partition swapping: %s with %s' % (lst[left], lst[right]))
                 tmp = lst[left]
                 lst[left] = lst[right]
                 lst[right] = tmp
 
-        # the end result is that all elements "less than" are left of the last position of the left bracket,
+        # the end result is that all elements "less than or equal" are left of the last position of the left bracket,
         # potentially unsorted
-        # and all elements "greater than" are right of the last position of the right bracket,
+        # and all elements "greater than or equal" are right of the last position of the right bracket,
         # potentially unsorted
+
+        # Edge case: all elements are less than/equal pivot, e.g.: [5, 3, 7, 1, 3, 2]
+        # Result:
+
+        # Edge case: all elements are the same
+        # Result:
+
         # return an index such that the "less than" and "greater than" sides can be partitioned and sorted again
+        # note that for this implementation, we do not split on the pivot
 
-        # right should equal left+1 at this point
-        assert right == left+1
-
-        # left and right should be the last positions of the "brackets"
         return left
 
     @classmethod
-    def _quick(cls, lst, start, end):
+    def _quick2(cls, lst, start, end):
         """Quicksort implementation for a list, internal method"""
         # this method is called recursively
         # on the left and right sections of each partition
@@ -80,6 +95,9 @@ class Sort(object):
         # partitioning is done for that piece of the overall list
         if start < end:
             partition_index = cls._quicksort_partition(lst, start, end)
+
+            # what do we do when partition_index is the start or end?
+
             logging.debug(
                 'partition:',
                 lst[start:partition_index],
@@ -90,18 +108,10 @@ class Sort(object):
         return lst
 
     @classmethod
-    def quick(cls, src_lst, start=0, end=None, inline=False):
-        """Quicksort implementation"""
-        # this is a wrapper method to handle kwargs before starting the sort
-
+    def quick2(cls, lst, start=0, end=None):
+        """Quicksort implementation 2, middle pivot"""
         if end is None:
-            end = (len(src_lst) - 1)
-
-        # support for inline sorting vs returning a sorted copy
-        if inline:
-            lst = src_lst
-        else:
-            lst = copy.deepcopy(src_lst)
+            end = (len(lst) - 1)
         return cls._quick(lst, start, end)
 
     @classmethod
@@ -213,3 +223,32 @@ class Sort(object):
             lst[cursor + 1] = value
 
         return lst
+
+    @classmethod
+    def selection(cls, lst):
+        """
+        TODO see if this works
+        selection sort is a naive sorting algorithm
+        Complexity:
+        n + n-1 + n-2 ... 1
+        "arithmetic series"
+        Big O notation / approximation:
+        O(n^2)
+        """
+        target_index = 0
+        while target_index < len(lst) - 1:
+            less_item = None
+            less_item_index = None
+            for i in range(target_index, len(lst) - 1):
+                if less_item is None or item < less_item:
+                    less_item = item
+                    less_item_index = i
+            else:
+                # after list is consumed,
+                # swap least value item we "selected" to the top
+                tmp = lst[target_index]
+                lst[target_index] = less_item
+                lst[less_item_index] = tmp
+                # next time through,
+                # we can skip 1 slot since we know it contains previous least item
+                target_index += 1

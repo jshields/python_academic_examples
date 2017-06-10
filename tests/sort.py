@@ -15,7 +15,32 @@ class TestSort(TestCase):
 
     def test_quick_sort(self):
         self.assertEqual(
-            Sort.quick(),
+            Sort.quick(jumbled_int_list),
+            sort(jumbled_int_list)
+        )
+
+    def test_merge_sort(self):
+        #self.assertEqual(
+        #    Sort.merge(jumbled_int_list),
+        #    sort(jumbled_int_list)
+        #)
+        pass
+
+    def test_bubble_sort(self):
+        self.assertEqual(
+            Sort.bubble(jumbled_int_list),
+            sort(jumbled_int_list)
+        )
+
+    def test_insertion_sort(self):
+        self.assertEqual(
+            Sort.insertion(jumbled_int_list),
+            sort(jumbled_int_list)
+        )
+
+    def test_selection_sort(self):
+        self.assertEqual(
+            Sort.selection(jumbled_int_list),
             sort(jumbled_int_list)
         )
 
