@@ -1,10 +1,11 @@
+"""Some implementations of quicksort"""
 import logging
 
 logging.basicConfig(filename='quick_sort.log', format='%(asctime)s %(message)s', level=logging.DEBUG)
 
 
-class QuickSort(object):
-    """Some implementations of quicksort"""
+class QuickSort1(object):
+    """Implementation 1: first element pivot"""
 
     @classmethod
     def _quicksort_partition(cls, lst, start, end):
@@ -71,23 +72,21 @@ class QuickSort(object):
         return lst
 
     @classmethod
-    def quick(cls, src_lst, start=0, end=None, inline=False):
+    def quick(cls, lst, start=0, end=None):
         """
         Original C.A.R Hoare Quicksort partition scheme implementation
         https://en.wikipedia.org/wiki/Quicksort#Hoare_partition_scheme
         """
         if end is None:
-            end = (len(src_lst) - 1)
-
-        # support for inline sorting vs returning a sorted copy
-        if inline:
-            lst = src_lst
-        else:
-            lst = copy.deepcopy(src_lst)
+            end = (len(lst) - 1)
         return cls._quick(lst, start, end)
 
+
+class QuickSort2(object):
+    """Implementation 2: middle pivot"""
+
     @classmethod
-    def _quicksort_partition2(cls, lst, left, right):
+    def _quicksort_partition(cls, lst, left, right):
         """
         Internal partition and sorting method
         :param int left: start of partition
@@ -101,7 +100,8 @@ class QuickSort(object):
         # https://en.wikipedia.org/wiki/Quicksort#Choice_of_pivot
         # "median of three" pivot selection is also good
 
-        pivot_index = left + right // 2
+        # middle, but protection from integer overflow
+        pivot_index = left + (right-left) // 2
         logging.debug('pivot index: %s' % pivot_index)
 
         pivot_value = lst[pivot_index]
@@ -109,12 +109,10 @@ class QuickSort(object):
 
         # for now the pivot element remains in its initial list position,
         # and elements will be index swapped (their indices switch)
-        # relative to the pivot value, not the pivot's index
-
+        # relative to the pivot value
         swapping = True
         while swapping:
-            init_left = left
-            init_right = right
+
             # with comparisons relative to the pivot,
             # "left pointer" index moves from left to right, and will stop on any element with a value not less than pivot value,
             # "right pointer" index moves from right to left, and will stop on any element with a value not greater than pivot value
@@ -135,9 +133,9 @@ class QuickSort(object):
                 lst[left] = lst[right]
                 lst[right] = tmp
 
-        # the end result is that all elements "less than or equal" are left of the last position of the left bracket,
+        # the end result is that all elements "less than or equal" are left of the last position of the left pointer,
         # potentially unsorted
-        # and all elements "greater than or equal" are right of the last position of the right bracket,
+        # and all elements "greater than or equal" are right of the last position of the right pointer,
         # potentially unsorted
 
         # Edge case: all elements are less than/equal pivot, e.g.: [5, 3, 7, 1, 3, 2]
@@ -152,7 +150,7 @@ class QuickSort(object):
         return left
 
     @classmethod
-    def _quick2(cls, lst, start, end):
+    def _quick(cls, lst, start, end):
         """Quicksort implementation for a list, internal method"""
         # this method is called recursively
         # on the left and right sections of each partition
@@ -163,19 +161,17 @@ class QuickSort(object):
         if start < end:
             partition_index = cls._quicksort_partition(lst, start, end)
 
-            # what do we do when partition_index is the start or end?
+            # what do we do when partition_index is the start VS end?
+            # how to handle both situations?
 
-            logging.debug(
-                'partition:',
-                lst[start:partition_index],
-                lst[partition_index+1, end]
-            )
+            logging.debug('partition:', lst[start:partition_index], lst[partition_index+1, end])
             cls._quick(lst, start, partition_index)
             cls._quick(lst, partition_index + 1, end)
+
         return lst
 
     @classmethod
-    def quick2(cls, lst, start=0, end=None):
+    def quick(cls, lst, start=0, end=None):
         """
         Quicksort implementation 2,
         middle pivot selection

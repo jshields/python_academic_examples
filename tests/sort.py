@@ -3,46 +3,55 @@
 import unittest
 from unittest import TestCase
 
-from examples.sort import Sort
+from examples.sort import bubble, insertion, merge, quick, selection
 
 
-# TODO
 class TestSort(TestCase):
     """Sort unit tests"""
 
     def setUp(self):
-        self.jumbled_int_list = [5, 2, 3, 1, 4, 8, 5, 9]
+        self.jumbled_int_lists = (
+            [9, 3, 1, 6, 4, 7, 7, 2, 0],
+            [5, 2, 3, 1, 4, 8, 5, 9],
+            [6, 3, 4, 1, 2, 7, 3],
+            [5, 3, 7, 1, 3, 2],
+            [1, 1, 1, 1, 1]
+        )
 
     def test_quick_sort(self):
-        self.assertEqual(
-            Sort.quick(jumbled_int_list),
-            sort(jumbled_int_list)
-        )
+        for lst in jumbled_int_lists:
+            self.assertEqual(
+                quick.QuickSort1.quick(lst),
+                sort(lst)
+            )
 
     def test_merge_sort(self):
         #self.assertEqual(
-        #    Sort.merge(jumbled_int_list),
+        #    merge.merge_sort(jumbled_int_list),
         #    sort(jumbled_int_list)
         #)
         pass
 
     def test_bubble_sort(self):
-        self.assertEqual(
-            Sort.bubble(jumbled_int_list),
-            sort(jumbled_int_list)
-        )
+        for lst in jumbled_int_lists:
+            self.assertEqual(
+                bubble.bubble_sort(lst),
+                sort(lst)
+            )
 
     def test_insertion_sort(self):
-        self.assertEqual(
-            Sort.insertion(jumbled_int_list),
-            sort(jumbled_int_list)
-        )
+        for lst in jumbled_int_lists:
+            self.assertEqual(
+                insertion.insertion_sort(lst),
+                sort(lst)
+            )
 
     def test_selection_sort(self):
-        self.assertEqual(
-            Sort.selection(jumbled_int_list),
-            sort(jumbled_int_list)
-        )
+        for lst in jumbled_int_lists:
+            self.assertEqual(
+                selection.selection_sort(lst),
+                sort(lst)
+            )
 
 
 if __name__ == '__main__':
