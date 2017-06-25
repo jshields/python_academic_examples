@@ -5,9 +5,6 @@ logging.basicConfig(filename='selection_sort.log', format='%(asctime)s %(message
 
 def selection_sort(lst):
     """
-    FIXME broken:
-    [1, 2, 3, 4, 6, 7, 7, 9, 0] != [0, 1, 2, 3, 4, 6, 7, 7, 9]
-
     selection sort is a naive sorting algorithm
     Complexity:
     n + n-1 + n-2 ... 1
@@ -16,10 +13,10 @@ def selection_sort(lst):
     O(n^2)
     """
     target_index = 0
-    while target_index < len(lst) - 1:
+    while target_index < len(lst):
         less_item = None
         less_item_index = None
-        for i in range(target_index, len(lst) - 1):
+        for i in range(target_index, len(lst)):
             item = lst[i]
             if less_item is None or item < less_item:
                 less_item = item

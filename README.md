@@ -30,7 +30,7 @@ algorithms
   - Quicksort (Hoare partition scheme) :white_check_mark:
   - Quicksort (middle pivot) :x:
   - Insertion Sort :white_check_mark:
-  - Selection Sort
+  - Selection Sort :white_check_mark:
 - search
   - Linear Search :white_check_mark:
   - Binary Search :white_check_mark:
