@@ -34,3 +34,8 @@ algorithms
 - search
   - Linear Search :white_check_mark:
   - Binary Search :white_check_mark:
+
+#### Running unit tests:
+`unittest` CLI from inside package:
+
+    python -m unittest tests.sort

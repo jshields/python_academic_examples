@@ -23,39 +23,49 @@ class TestSort(TestCase):
             [5]
         )
 
-    def test_quick_sort(self):
-        for lst in jumbled_int_lists:
+    def test_quick_sort1(self):
+        for lst in self.jumbled_int_lists:
             self.assertEqual(
                 quick.QuickSort1.quick(lst),
-                sort(lst)
+                sorted(lst)
             )
 
+    @unittest.skip('Not Implemented')
+    def test_quick_sort2(self):
+        for lst in self.jumbled_int_lists:
+            self.assertEqual(
+                quick.QuickSort1.quick(lst),
+                sorted(lst)
+            )
+
+
+    @unittest.skip('Not Implemented')
     def test_merge_sort(self):
         #self.assertEqual(
         #    merge.merge_sort(jumbled_int_list),
-        #    sort(jumbled_int_list)
+        #    sorted(jumbled_int_list)
         #)
         pass
 
     def test_bubble_sort(self):
-        for lst in jumbled_int_lists:
+        for lst in self.jumbled_int_lists:
             self.assertEqual(
                 bubble.bubble_sort(lst),
-                sort(lst)
+                sorted(lst)
             )
 
     def test_insertion_sort(self):
-        for lst in jumbled_int_lists:
+        for lst in self.jumbled_int_lists:
             self.assertEqual(
                 insertion.insertion_sort(lst),
-                sort(lst)
+                sorted(lst)
             )
 
     def test_selection_sort(self):
-        for lst in jumbled_int_lists:
+        for lst in self.jumbled_int_lists:
             self.assertEqual(
                 selection.selection_sort(lst),
-                sort(lst)
+                sorted(lst)
             )
 
 

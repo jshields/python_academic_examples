@@ -115,6 +115,8 @@ class QuickSort2(object):
         # and elements will be index swapped (their indices switch)
         # relative to the pivot value
 
+        # TODO read this: http://www.bogotobogo.com/Algorithms/quicksort.php
+
         while left < right:
 
             # with comparisons relative to the pivot,
