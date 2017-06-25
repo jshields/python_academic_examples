@@ -13,6 +13,7 @@ class TestSort(TestCase):
         self.jumbled_int_lists = (
             [9, 3, 1, 6, 4, 7, 7, 2, 0],
             [5, 2, 3, 1, 4, 8, 5, 9],
+            [5, 3, 5, 5, 5, 6, 8],
             [6, 3, 4, 1, 2, 7, 3],
             [5, 3, 7, 1, 3, 2],
             # some edge cases
@@ -26,26 +27,25 @@ class TestSort(TestCase):
     def test_quick_sort1(self):
         for lst in self.jumbled_int_lists:
             self.assertEqual(
-                quick.QuickSort1.quick(lst),
+                quick.QuickSort.quick(lst),
                 sorted(lst)
             )
 
-    @unittest.skip('Not Implemented')
     def test_quick_sort2(self):
         for lst in self.jumbled_int_lists:
             self.assertEqual(
-                quick.QuickSort1.quick(lst),
+                quick.QuickSortMiddlePivot.quick(lst),
                 sorted(lst)
             )
 
 
     @unittest.skip('Not Implemented')
     def test_merge_sort(self):
-        #self.assertEqual(
-        #    merge.merge_sort(jumbled_int_list),
-        #    sorted(jumbled_int_list)
-        #)
-        pass
+        for lst in self.jumbled_int_lists:
+            self.assertEqual(
+                merge.merge_sort(lst),
+                sorted(lst)
+            )
 
     def test_bubble_sort(self):
         for lst in self.jumbled_int_lists:

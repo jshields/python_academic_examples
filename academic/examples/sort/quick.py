@@ -1,15 +1,19 @@
-"""Some implementations of quicksort"""
+"""implementations of quicksort"""
 import logging
 
 logging.basicConfig(filename='quick_sort.log', format='%(asctime)s %(message)s', level=logging.DEBUG)
 
 
-class QuickSort1(object):
+class QuickSort(object):
     """Implementation 1: first element pivot"""
 
     @classmethod
     def _quicksort_partition(cls, lst, start, end):
-        """Internal partition and sorting method for Sort._quick driver method"""
+        """
+        Internal partition and sorting method for quicksort.
+        Original C.A.R Hoare quicksort partition scheme implementation.
+        https://en.wikipedia.org/wiki/Quicksort#Hoare_partition_scheme
+        """
         # the pivot element value will be the basis for comparison in sorting
         # we use the first item in this partition of the list as the pivot
 
@@ -33,6 +37,7 @@ class QuickSort1(object):
                 left = left + 1
             while lst[right] >= pivot and right >= left:
                 right = right - 1
+
             if right < left:
                 swapping = False
             else:
@@ -74,15 +79,14 @@ class QuickSort1(object):
     @classmethod
     def quick(cls, lst, start=0, end=None):
         """
-        Original C.A.R Hoare Quicksort partition scheme implementation
-        https://en.wikipedia.org/wiki/Quicksort#Hoare_partition_scheme
+        wrapper method
         """
         if end is None:
             end = (len(lst) - 1)
         return cls._quick(lst, start, end)
 
 
-class QuickSort2(object):
+class QuickSortMiddlePivot(QuickSort):
     """Implementation 2: middle pivot"""
 
     @classmethod
@@ -123,19 +127,20 @@ class QuickSort2(object):
             # "left pointer" index moves from left to right, and will stop on any element with a value not less than pivot value,
             # "right pointer" index moves from right to left, and will stop on any element with a value not greater than pivot value
 
-            # if both "pointers" stopped, then swap the elements they stopped on?
             while lst[left] <= pivot_value:
                 left += 1
-            while lst[right] >= pivot_value:
+            while lst[right] > pivot_value:  # >= or > ?
                 right -= 1
 
             if left < right:
                 # swap
                 logging.debug('before swap: ', lst)
                 logging.debug('swapping: %s with %s' % (lst[left], lst[right]))
+
                 tmp = lst[left]
                 lst[left] = lst[right]
                 lst[right] = tmp
+
                 logging.debug('after swap: ', lst)
 
         # the end result is that all elements "less than or equal" are left of the last position of the left pointer,
@@ -145,6 +150,11 @@ class QuickSort2(object):
 
         # Edge case: all elements are less than/equal pivot, e.g.: [5, 3, 7, 1, 3, 2]
         # Result:
+        # FIXME pivot can be selected for swapping with something else?
+        # E.g. pivot is large(st) value swapped with smaller value
+        # or pivot is small(est) value swapped with larger value
+
+        # [5, 3, 1, 8, 3, 2]
 
         # Edge case: all elements are the same
         # Result:
@@ -180,14 +190,3 @@ class QuickSort2(object):
             cls._quick(lst, partition_index + 1, end)
 
         return lst
-
-    @classmethod
-    def quick(cls, lst, start=0, end=None):
-        """
-        Quicksort implementation 2,
-        middle pivot selection
-        """
-        if end is None:
-            end = (len(lst) - 1)
-        logging.debug('start: ', lst)
-        return cls._quick(lst, start, end)
