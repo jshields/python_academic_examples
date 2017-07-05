@@ -32,6 +32,16 @@ class TestSort(TestCase):
             )
 
     def test_quick_sort2(self):
+        # Edge case: all elements are less than/equal pivot, e.g.: [5, 3, 7, 1, 3, 2]
+        # Result:
+        # FIXME pivot can be selected for swapping with something else?
+        # E.g. pivot is large(st) value swapped with smaller value
+        # or pivot is small(est) value swapped with larger value
+
+        # [5, 3, 1, 8, 3, 2]
+
+        # Edge case: all elements are the same
+        # Result:
         for lst in self.jumbled_int_lists:
             self.assertEqual(
                 quick.QuickSortMiddlePivot.quick(lst),

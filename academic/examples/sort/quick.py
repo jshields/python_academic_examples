@@ -81,112 +81,114 @@ class QuickSort(object):
         """
         wrapper method
         """
+        logging.debug('quicksort starting: %s' % lst)
         if end is None:
             end = (len(lst) - 1)
         return cls._quick(lst, start, end)
 
 
 class QuickSortMiddlePivot(QuickSort):
-    """Implementation 2: middle pivot"""
+    """
+    Implementation 2: middle pivot
+
+    We use the middle element as the pivot,
+    to avoid O(n^2) performance in some common scenarios.
+    More discussion here:
+    https://stackoverflow.com/questions/164163/quicksort-choosing-the-pivot
+    https://en.wikipedia.org/wiki/Quicksort#Choice_of_pivot
+    "median of three" pivot selection is also good
+    """
 
     @classmethod
-    def _quicksort_partition(cls, lst, left, right):
-        """
-        Internal partition and sorting method.
-        The list is "virtually" partitioned using indices, not by making new list objects,
-        so the operation is inline.
-        :param int left: start of partition
-        :param int right: end of partition
-        """
-        # The pivot element value will be the basis for comparison in sorting.
-        # We use the middle item in this partition of the list as the pivot,
-        # to avoid O(n^2) performance in some common scenarios.
-        # More discussion here:
-        # https://stackoverflow.com/questions/164163/quicksort-choosing-the-pivot
-        # https://en.wikipedia.org/wiki/Quicksort#Choice_of_pivot
-        # "median of three" pivot selection is also good
-        logging.debug('left: %d, right: %d' % (left, right))
+    def _swap(cls, lst, a, b):
+        tmp = lst[a]
+        lst[a] = lst[b]
+        lst[b] = tmp
 
-        pivot_index = left + right // 2  # <- should cause IndexError for certain data?
-        # middle, but protection from integer overflow
-        #pivot_index = left + (right-left) // 2
+    @classmethod
+    def _quick(cls, lst, left, right):
+        """
+        Quicksort implementation for a list, internal recursive method
+        :param int start: lefthand bounds of list to be partitioned / sorted
+        :param int end: righthand bounds of list to be partitioned / sorted
+        """
+
+        if left >= right:
+            if left == right:
+                logging.debug('single element partition: %s' % lst[left])
+            # we're at the deepest useful recursion depth, so stop for this branch
+            return
+
+        # save initial indices, we'll need them later for partitioning
+        left_init = left
+        right_init = right
+
+        logging.debug('left: %d, right: %d' % (left, right))
+        pivot_index = left + right // 2
+        # should this be: pivot_index = left + (right-left) // 2 to avoid going out of range?
         logging.debug('pivot index: %s' % pivot_index)
 
         pivot_value = lst[pivot_index]
         logging.debug('pivot value: %s' % pivot_value)
 
-        # for now the pivot element remains in its initial list position,
-        # and elements will be index swapped (their indices switch)
-        # relative to the pivot value
-
-        # TODO read this: http://www.bogotobogo.com/Algorithms/quicksort.php
-
-        while left < right:
+        while left <= right:
 
             # with comparisons relative to the pivot,
-            # "left pointer" index moves from left to right, and will stop on any element with a value not less than pivot value,
-            # "right pointer" index moves from right to left, and will stop on any element with a value not greater than pivot value
+            # "left pointer" index moves from left to right, and will stop...
+            # "right pointer" index moves from right to left, and will stop...
 
-            while lst[left] <= pivot_value:
+            while lst[left] <= pivot_value:  # note "equals pivot" included here
                 left += 1
-            while lst[right] > pivot_value:  # >= or > ?
+            while lst[right] > pivot_value:
                 right -= 1
 
-            if left < right:
+            if left <= right:
                 # swap
-                logging.debug('before swap: ', lst)
+                logging.debug('before swap: %s' % lst)
                 logging.debug('swapping: %s with %s' % (lst[left], lst[right]))
 
-                tmp = lst[left]
-                lst[left] = lst[right]
-                lst[right] = tmp
+                cls._swap(lst, left, right)
 
-                logging.debug('after swap: ', lst)
+                logging.debug('after swap: %s' % lst)
 
-        # the end result is that all elements "less than or equal" are left of the last position of the left pointer,
-        # potentially unsorted
-        # and all elements "greater than or equal" are right of the last position of the right pointer,
-        # potentially unsorted
+                # do we need to increment left and right one last time after swap?
 
-        # Edge case: all elements are less than/equal pivot, e.g.: [5, 3, 7, 1, 3, 2]
-        # Result:
-        # FIXME pivot can be selected for swapping with something else?
-        # E.g. pivot is large(st) value swapped with smaller value
-        # or pivot is small(est) value swapped with larger value
+        logging.debug(
+            'partition/recurse\n'
+            'left:\n'
+            '%s\n'
+            'right:\n'
+            '%s' % (
+                lst[left_init:right], lst[left:right_init]
+            )
+        )
 
-        # [5, 3, 1, 8, 3, 2]
 
-        # Edge case: all elements are the same
-        # Result:
-
-        # return an index such that the "less than" and "greater than" sides can be partitioned and sorted again
-        # note that for this implementation, we do not split on the pivot
-
-        return left
-
-    @classmethod
-    def _quick(cls, lst, start, end):
         """
-        Quicksort implementation for a list, internal method
-        :param int start: lefthand bounds of list to be partitioned / sorted
-        :param int end: righthand bounds of list to be partitioned / sorted
+        maximum recursion depth exceeded
+
+        (Pdb) lst
+        [0, 1, 3, 2, 4, 7, 7, 6, 9]
+        (Pdb) right
+        4
+        (Pdb) right_init
+        4
+        (Pdb) left
+        5
+        (Pdb) left_init
+        2
+
+        (Pdb) pivot_index
+        4
+        (Pdb) pivot_value
+        4
         """
-        # this method is called recursively
-        # on the left and right sections of each list partition
-        # the sorting work is done in _quicksort_partition
-
-        # when we end up with a list of 1 item,
-        # we have partitioned and sorted as far as we can for this recursive depth
-        if start < end:
-            partition_index = cls._quicksort_partition(lst, start, end)
-
-            logging.debug('partition: ', lst[start:partition_index], lst[partition_index+1, end])
-
-            # possibly needs to be:
-            #cls._quick(lst, start, last_right)
-            #cls._quick(lst, last_left, end)
-
-            cls._quick(lst, start, partition_index)
-            cls._quick(lst, partition_index + 1, end)
+        try:
+            # if left_init < right:
+            cls._quick(lst, left_init, right)
+            # if left < right_init:
+            cls._quick(lst, left, right_init)
+        except:
+            import pdb;pdb.set_trace()
 
         return lst
