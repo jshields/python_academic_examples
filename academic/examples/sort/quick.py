@@ -172,9 +172,10 @@ class QuickSortMiddlePivot(object):
 
 
             """
+
             ipdb> lst
             [1, 6, 2, 7, 3, 2]
-            
+
             ipdb> left_init
             1
             ipdb> right_init
@@ -184,15 +185,17 @@ class QuickSortMiddlePivot(object):
             6
             ipdb> right
             5
-            
+
             ipdb> pivot_value
             7
             ipdb> pivot_index
             3
             """
 
+            # `<=` for "equal to pivot" case  TODO is it needed?
+            # pivot is used as break, so doesn't seem so
             try:
-                while left <= right_init and lst[left] <= pivot_value:  # `<=` for "equal to pivot" case  TODO (is it really needed?)
+                while lst[left] < pivot_value:
                     left += 1
             except:
                 import ipdb;ipdb.set_trace()
@@ -200,7 +203,7 @@ class QuickSortMiddlePivot(object):
 
 
             try:
-                while right >= left_init and lst[right] > pivot_value:
+                while lst[right] > pivot_value:
                     right -= 1
             except:
                 import ipdb;ipdb.set_trace()
@@ -235,11 +238,6 @@ class QuickSortMiddlePivot(object):
         """
         retest this:
         [0, 1, 3, 2, 4, 7, 7, 6, 9]
-        
-
-                   R / RI
-               LI    P  L
-        [0, 1, 3, 2, 4, 7, 7, 6, 9]
         """
         #try:
 
@@ -252,11 +250,6 @@ class QuickSortMiddlePivot(object):
         #    import ipdb;ipdb.set_trace()
         #    logging.error(e)
 
-
-        """
-        from examples.sort.quick import QuickSortMiddlePivot
-        QuickSortMiddlePivot.quick([2,6,1,7,3,2])
-        """
 
         return lst
 

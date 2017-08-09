@@ -1,22 +1,23 @@
 #!/usr/bin/python
 """Tests for sort algorithms"""
 import unittest
-from unittest import TestCase
 
 from examples.sort import bubble, insertion, merge, quick, selection
 
 
-class TestSort(TestCase):
+class TestSort(unittest.TestCase):
     """Sort unit tests"""
 
     def setUp(self):
         self.jumbled_int_lists = (
             [9, 3, 1, 6, 4, 7, 7, 2, 0],
+            [0, 1, 3, 2, 4, 7, 7, 6, 9],
             [5, 2, 3, 1, 4, 8, 5, 9],
             [5, 3, 5, 5, 5, 6, 8],
             [6, 3, 4, 1, 2, 7, 3],
+            [0, 1, 2, 7, 0, 1, 2],
             [5, 3, 7, 1, 3, 2],
-            # some edge cases
+            [2, 6, 1, 7, 3, 2],
             [1, 1, 1, 1, 1],
             [2, 2, 2, 0],
             [1, 0],
@@ -32,16 +33,7 @@ class TestSort(TestCase):
             )
 
     def test_quick_sort2(self):
-        # Edge case: all elements are less than/equal pivot, e.g.: [5, 3, 7, 1, 3, 2]
-        # Result:
-        # FIXME pivot can be selected for swapping with something else?
-        # E.g. pivot is large(st) value swapped with smaller value
-        # or pivot is small(est) value swapped with larger value
 
-        # [5, 3, 1, 8, 3, 2]
-
-        # Edge case: all elements are the same
-        # Result:
         for lst in self.jumbled_int_lists:
             self.assertEqual(
                 quick.QuickSortMiddlePivot.quick(lst),

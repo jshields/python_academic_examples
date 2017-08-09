@@ -37,11 +37,18 @@ datastructures (re-implemented even if they are in the standard library, just fo
 - DoubleLinkedList :x:
 - Binary Tree :x:
 
+
+### Sort
+
+#### Usage:
+
+    from examples.sort.quick import QuickSortMiddlePivot
+    QuickSortMiddlePivot.quick([2,6,1,7,3,2])
+
 #### Running unit tests:
 `unittest` CLI from inside package:
 
     python -m unittest tests.sort
-
 
 #### Footnotes:
 
