@@ -1,5 +1,6 @@
 """implementations of quicksort"""
 import logging
+import sys
 
 logging.basicConfig(filename='quick_sort.log', format='%(asctime)s %(message)s', level=logging.DEBUG)
 
@@ -87,7 +88,7 @@ class QuickSort(object):
         return cls._quick(lst, start, end)
 
 
-class QuickSortMiddlePivot(QuickSort):
+class QuickSortMiddlePivot(object):
     """
     Implementation 2: middle pivot
 
@@ -113,9 +114,13 @@ class QuickSortMiddlePivot(QuickSort):
         :param int end: righthand bounds of list to be partitioned / sorted
         """
 
-        if left >= right:
-            if left == right:
-                logging.debug('single element partition: %s' % lst[left])
+        if left > right:
+            # raise
+            logging.error('left %d greater than right %d' % (left, right))
+            import ipdb;ipdb.set_trace()
+
+        if left == right:
+            logging.debug('single element partition: %s' % lst[left])
             # we're at the deepest useful recursion depth, so stop for this branch
             return
 
@@ -124,23 +129,83 @@ class QuickSortMiddlePivot(QuickSort):
         right_init = right
 
         logging.debug('left: %d, right: %d' % (left, right))
-        pivot_index = left + right // 2
-        # should this be: pivot_index = left + (right-left) // 2 to avoid going out of range?
-        logging.debug('pivot index: %s' % pivot_index)
 
+
+        pivot_index = (left + right) // 2
+        # possibly should be this?
+        # pivot_index = left + (right-left) // 2
+
+        logging.debug('pivot index: %s' % pivot_index)
         pivot_value = lst[pivot_index]
         logging.debug('pivot value: %s' % pivot_value)
 
+
+
+        """
+        QuickSortMiddlePivot.quick([2,6,1,7,3,2])
+
+        IndexError: list index out of range
+
+
+
+        2017-08-08 22:13:20,786 quicksort middle pivot starting: [2, 6, 1, 7, 3, 2]
+        2017-08-08 22:13:20,786 left: 0, right: 5
+        2017-08-08 22:13:20,786 pivot index: 2
+        2017-08-08 22:13:20,786 pivot value: 1
+        2017-08-08 22:13:20,787 before swap: [2, 6, 1, 7, 3, 2]
+        2017-08-08 22:13:20,787 swapping: 2 with 1
+        2017-08-08 22:13:20,787 after swap: [1, 6, 2, 7, 3, 2]
+        2017-08-08 22:13:20,787 partition/recurse
+        left:
+        []  <- left partition empty... is that correct?
+        right:
+        [6, 2, 7, 3]   <- last item chopped off of right partition, is that causing the IndexError?
+        2017-08-08 22:13:20,787 single element partition: 1
+        2017-08-08 22:13:20,787 left: 1, right: 5
+        2017-08-08 22:13:20,787 pivot index: 3
+        2017-08-08 22:13:20,787 pivot value: 7
+        """
+
+
         while left <= right:
 
-            # with comparisons relative to the pivot,
-            # "left pointer" index moves from left to right, and will stop...
-            # "right pointer" index moves from right to left, and will stop...
 
-            while lst[left] <= pivot_value:  # note "equals pivot" included here
-                left += 1
-            while lst[right] > pivot_value:
-                right -= 1
+
+            """
+            ipdb> lst
+            [1, 6, 2, 7, 3, 2]
+            
+            ipdb> left_init
+            1
+            ipdb> right_init
+            5
+
+            ipdb> left
+            6
+            ipdb> right
+            5
+            
+            ipdb> pivot_value
+            7
+            ipdb> pivot_index
+            3
+            """
+
+            try:
+                while left <= right_init and lst[left] <= pivot_value:  # `<=` for "equal to pivot" case  TODO (is it really needed?)
+                    left += 1
+            except:
+                import ipdb;ipdb.set_trace()
+
+
+
+            try:
+                while right >= left_init and lst[right] > pivot_value:
+                    right -= 1
+            except:
+                import ipdb;ipdb.set_trace()
+
+
 
             if left <= right:
                 # swap
@@ -150,8 +215,9 @@ class QuickSortMiddlePivot(QuickSort):
                 cls._swap(lst, left, right)
 
                 logging.debug('after swap: %s' % lst)
-
-                # do we need to increment left and right one last time after swap?
+                # increment left and right again after swap changes list
+                left += 1
+                right -= 1
 
         logging.debug(
             'partition/recurse\n'
@@ -159,36 +225,47 @@ class QuickSortMiddlePivot(QuickSort):
             '%s\n'
             'right:\n'
             '%s' % (
-                lst[left_init:right], lst[left:right_init]
+                lst[left_init:(right + 1)], lst[left:(right_init + 1)]
             )
         )
 
 
-        """
-        maximum recursion depth exceeded
+        # sys.setrecursionlimit(sys.getrecursionlimit() * 10)
 
-        (Pdb) lst
+        """
+        retest this:
         [0, 1, 3, 2, 4, 7, 7, 6, 9]
-        (Pdb) right
-        4
-        (Pdb) right_init
-        4
-        (Pdb) left
-        5
-        (Pdb) left_init
-        2
+        
 
-        (Pdb) pivot_index
-        4
-        (Pdb) pivot_value
-        4
+                   R / RI
+               LI    P  L
+        [0, 1, 3, 2, 4, 7, 7, 6, 9]
         """
-        try:
-            # if left_init < right:
-            cls._quick(lst, left_init, right)
-            # if left < right_init:
-            cls._quick(lst, left, right_init)
-        except:
-            import pdb;pdb.set_trace()
+        #try:
+
+        # if left_init < right:
+        cls._quick(lst, left_init, right)
+        # if left < right_init:
+        cls._quick(lst, left, right_init)
+
+        #except Exception as e:
+        #    import ipdb;ipdb.set_trace()
+        #    logging.error(e)
+
+
+        """
+        from examples.sort.quick import QuickSortMiddlePivot
+        QuickSortMiddlePivot.quick([2,6,1,7,3,2])
+        """
 
         return lst
+
+    @classmethod
+    def quick(cls, lst, start=0, end=None):
+        """
+        wrapper method
+        """
+        logging.debug('quicksort middle pivot starting: %s' % lst)
+        if end is None:
+            end = (len(lst) - 1)
+        return cls._quick(lst, start, end)
