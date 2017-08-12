@@ -135,7 +135,8 @@ class QuickSortMiddlePivot(object):
         if left >= right:
             logging.debug('single element partition: %s' % lst[left])
             # we're at the deepest useful recursion depth, stop partitioning
-            return
+            # returning the list here makes it work for 1 item lists
+            return lst
 
         # save initial indices, we'll need them later for partitioning
         left_init = left
