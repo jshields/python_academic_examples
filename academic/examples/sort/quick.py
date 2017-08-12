@@ -1,7 +1,9 @@
 """implementations of quicksort"""
 import logging
 
-logging.basicConfig(filename='quick_sort.log', format='%(asctime)s %(message)s', level=logging.DEBUG)
+logging.basicConfig(
+    filename='quick_sort.log', format='%(asctime)s %(message)s', level=logging.DEBUG
+)
 
 
 class QuickSort(object):
@@ -32,8 +34,10 @@ class QuickSort(object):
         while swapping:
             """
             relative to the pivot value,
-            left bracket moves from left to right, and will trip on any element with a value not less than,
-            right bracket moves from right to left, and will trip on any element with a value not greater than
+            left bracket moves from left to right,
+            and will trip on any element with a value not less than,
+            right bracket moves from right to left,
+            and will trip on any element with a value not greater than
             """
             while left <= right and lst[left] <= pivot:
                 left = left + 1
@@ -44,24 +48,32 @@ class QuickSort(object):
                 swapping = False
             else:
                 # swap places if the bracket trips
-                logging.debug('_quicksort_partition swapping: %s with %s' % (lst[left], lst[right]))
+                logging.debug(
+                    '_quicksort_partition swapping: %s with %s' % (lst[left], lst[right])
+                )
                 tmp = lst[left]
                 lst[left] = lst[right]
                 lst[right] = tmp
         """
         swap pivot with the last known right bracket (greater than) element
-        this puts the pivot in between the elements that were swapped to the "less than" position
+        this puts the pivot in between
+        the elements that were swapped to the "less than" position
         and elements that were swapped to the "greater than" position
         """
-        logging.debug('_quicksort_partition final swap: %s with %s' % (lst[start], lst[right]))
+        logging.debug(
+            '_quicksort_partition final swap: %s with %s' % (lst[start], lst[right])
+        )
         tmp = lst[start]
         lst[start] = lst[right]
         lst[right] = tmp
         """
-        the end result is that all elements less than are left of the pivot element, potentially unsorted
-        and all elements greater than the pivot element are right of the pivot element, potentially unsorted
-        return the pivot index, so that the less than and greater than sides can be partitioned and sorted again,
-        in Sort._quick
+        the end result is that all elements less than are left of the pivot element,
+        potentially unsorted,
+        and all elements greater than the pivot element are right of the pivot element,
+        potentially unsorted,
+        return the pivot index,
+        so that the less than and greater than sides can be partitioned and sorted again,
+        in `Sort._quick`
         """
         logging.debug('pivot is %s' % right)
         return right
@@ -69,12 +81,13 @@ class QuickSort(object):
     @classmethod
     def _quick(cls, lst, start, end):
         """Quicksort implementation for a list, internal method"""
-        # this method is called recursively
-        # on the left and right sections of each partition
-        # the sorting work is done in _quicksort_partition
-
-        # eventually, a recursion depth will be reached
-        # at which the overall list is fully sorted
+        """
+        this method is called recursively
+        on the left and right sections of each partition
+        the sorting work is done in `_quicksort_partition`.
+        eventually, a recursion depth will be reached
+        at which the overall list is fully sorted
+        """
         if start < end:
             # sort before and after the pivot
             pivot_index = cls._quicksort_partition(lst, start, end)
@@ -138,8 +151,11 @@ class QuickSortMiddlePivot(object):
         pivot_value = lst[pivot_index]
         logging.debug('pivot value: %s' % pivot_value)
 
-        # sometimes elements are swapped with themselves, is there a way to skip this without getting stuck in a loop?
-        # E.g. [2,6,1,7,7,7,7,3,2] -> swap 6 with 6
+        """
+        sometimes elements are swapped with themselves,
+        is there a way to skip this without getting stuck in a loop?
+        E.g. [2,6,1,7,7,7,7,3,2] -> swap 6 with 6
+        """
         while left <= right:
 
             # pivot is used as while loop break
