@@ -1,6 +1,5 @@
 """implementations of quicksort"""
 import logging
-import sys
 
 logging.basicConfig(filename='quick_sort.log', format='%(asctime)s %(message)s', level=logging.DEBUG)
 
@@ -115,9 +114,12 @@ class QuickSortMiddlePivot(object):
         """
 
         if left > right:
-            # raise
-            logging.error('left %d greater than right %d' % (left, right))
-            import ipdb;ipdb.set_trace()
+            # this seems to be normal in certain conditions when the list is done being sorted
+            #logging.warn('left %d greater than right %d' % (left, right))
+            # single element partition seems to happen here when the list is done being sorted
+            # lst[left]
+            #import ipdb;ipdb.set_trace()
+            return
 
         if left == right:
             logging.debug('single element partition: %s' % lst[left])
@@ -130,9 +132,8 @@ class QuickSortMiddlePivot(object):
 
         logging.debug('left: %d, right: %d' % (left, right))
 
-
         pivot_index = (left + right) // 2
-        # possibly should be this?
+        # possibly should/could be this?
         # pivot_index = left + (right-left) // 2
 
         logging.debug('pivot index: %s' % pivot_index)
@@ -140,57 +141,16 @@ class QuickSortMiddlePivot(object):
         logging.debug('pivot value: %s' % pivot_value)
 
 
-
         """
         QuickSortMiddlePivot.quick([2,6,1,7,3,2])
-
-        IndexError: list index out of range
-
-
-
-        2017-08-08 22:13:20,786 quicksort middle pivot starting: [2, 6, 1, 7, 3, 2]
-        2017-08-08 22:13:20,786 left: 0, right: 5
-        2017-08-08 22:13:20,786 pivot index: 2
-        2017-08-08 22:13:20,786 pivot value: 1
-        2017-08-08 22:13:20,787 before swap: [2, 6, 1, 7, 3, 2]
-        2017-08-08 22:13:20,787 swapping: 2 with 1
-        2017-08-08 22:13:20,787 after swap: [1, 6, 2, 7, 3, 2]
-        2017-08-08 22:13:20,787 partition/recurse
-        left:
-        []  <- left partition empty... is that correct?
-        right:
-        [6, 2, 7, 3]   <- last item chopped off of right partition, is that causing the IndexError?
-        2017-08-08 22:13:20,787 single element partition: 1
-        2017-08-08 22:13:20,787 left: 1, right: 5
-        2017-08-08 22:13:20,787 pivot index: 3
-        2017-08-08 22:13:20,787 pivot value: 7
+        QuickSortMiddlePivot.quick([2,6,1,7,7,7,7,3,2])
         """
-
+        # sometimes elements are swapped with themselves, perhaps this should be `<`
+        # 6 with 6
 
         while left <= right:
 
 
-
-            """
-
-            ipdb> lst
-            [1, 6, 2, 7, 3, 2]
-
-            ipdb> left_init
-            1
-            ipdb> right_init
-            5
-
-            ipdb> left
-            6
-            ipdb> right
-            5
-
-            ipdb> pivot_value
-            7
-            ipdb> pivot_index
-            3
-            """
 
             # `<=` for "equal to pivot" case  TODO is it needed?
             # pivot is used as break, so doesn't seem so
@@ -201,13 +161,11 @@ class QuickSortMiddlePivot(object):
                 import ipdb;ipdb.set_trace()
 
 
-
             try:
                 while lst[right] > pivot_value:
                     right -= 1
             except:
                 import ipdb;ipdb.set_trace()
-
 
 
             if left <= right:
@@ -222,6 +180,7 @@ class QuickSortMiddlePivot(object):
                 left += 1
                 right -= 1
 
+
         logging.debug(
             'partition/recurse\n'
             'left:\n'
@@ -231,7 +190,6 @@ class QuickSortMiddlePivot(object):
                 lst[left_init:(right + 1)], lst[left:(right_init + 1)]
             )
         )
-
 
         # sys.setrecursionlimit(sys.getrecursionlimit() * 10)
 
@@ -249,7 +207,6 @@ class QuickSortMiddlePivot(object):
         #except Exception as e:
         #    import ipdb;ipdb.set_trace()
         #    logging.error(e)
-
 
         return lst
 
