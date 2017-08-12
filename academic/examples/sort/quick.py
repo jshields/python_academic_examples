@@ -30,9 +30,11 @@ class QuickSort(object):
         # keep swapping until the brackets pass/overlap each other
         swapping = True
         while swapping:
-            # relative to the pivot value,
-            # left bracket moves from left to right, and will trip on any element with a value not less than,
-            # right bracket moves from right to left, and will trip on any element with a value not greater than
+            """
+            relative to the pivot value,
+            left bracket moves from left to right, and will trip on any element with a value not less than,
+            right bracket moves from right to left, and will trip on any element with a value not greater than
+            """
             while left <= right and lst[left] <= pivot:
                 left = left + 1
             while lst[right] >= pivot and right >= left:
@@ -46,17 +48,21 @@ class QuickSort(object):
                 tmp = lst[left]
                 lst[left] = lst[right]
                 lst[right] = tmp
-        # swap pivot with the last known right bracket (greater than) element
-        # this puts the pivot in between the elements that were swapped to the "less than" position
-        # and elements that were swapped to the "greater than" position
+        """
+        swap pivot with the last known right bracket (greater than) element
+        this puts the pivot in between the elements that were swapped to the "less than" position
+        and elements that were swapped to the "greater than" position
+        """
         logging.debug('_quicksort_partition final swap: %s with %s' % (lst[start], lst[right]))
         tmp = lst[start]
         lst[start] = lst[right]
         lst[right] = tmp
-        # the end result is that all elements less than are left of the pivot element, potentially unsorted
-        # and all elements greater than the pivot element are right of the pivot element, potentially unsorted
-        # return the pivot index, so that the less than and greater than sides can be partitioned and sorted again,
-        # in Sort._quick
+        """
+        the end result is that all elements less than are left of the pivot element, potentially unsorted
+        and all elements greater than the pivot element are right of the pivot element, potentially unsorted
+        return the pivot index, so that the less than and greater than sides can be partitioned and sorted again,
+        in Sort._quick
+        """
         logging.debug('pivot is %s' % right)
         return right
 
@@ -113,17 +119,9 @@ class QuickSortMiddlePivot(object):
         :param int end: righthand bounds of list to be partitioned / sorted
         """
 
-        if left > right:
-            # this seems to be normal in certain conditions when the list is done being sorted
-            #logging.warn('left %d greater than right %d' % (left, right))
-            # single element partition seems to happen here when the list is done being sorted
-            # lst[left]
-            #import ipdb;ipdb.set_trace()
-            return
-
-        if left == right:
+        if left >= right:
             logging.debug('single element partition: %s' % lst[left])
-            # we're at the deepest useful recursion depth, so stop for this branch
+            # we're at the deepest useful recursion depth, stop partitioning
             return
 
         # save initial indices, we'll need them later for partitioning
@@ -140,33 +138,15 @@ class QuickSortMiddlePivot(object):
         pivot_value = lst[pivot_index]
         logging.debug('pivot value: %s' % pivot_value)
 
-
-        """
-        QuickSortMiddlePivot.quick([2,6,1,7,3,2])
-        QuickSortMiddlePivot.quick([2,6,1,7,7,7,7,3,2])
-        """
-        # sometimes elements are swapped with themselves, perhaps this should be `<`
-        # 6 with 6
-
+        # sometimes elements are swapped with themselves, is there a way to skip this without getting stuck in a loop?
+        # E.g. [2,6,1,7,7,7,7,3,2] -> swap 6 with 6
         while left <= right:
 
-
-
-            # `<=` for "equal to pivot" case  TODO is it needed?
-            # pivot is used as break, so doesn't seem so
-            try:
-                while lst[left] < pivot_value:
-                    left += 1
-            except:
-                import ipdb;ipdb.set_trace()
-
-
-            try:
-                while lst[right] > pivot_value:
-                    right -= 1
-            except:
-                import ipdb;ipdb.set_trace()
-
+            # pivot is used as while loop break
+            while lst[left] < pivot_value:
+                left += 1
+            while lst[right] > pivot_value:
+                right -= 1
 
             if left <= right:
                 # swap
@@ -180,7 +160,6 @@ class QuickSortMiddlePivot(object):
                 left += 1
                 right -= 1
 
-
         logging.debug(
             'partition/recurse\n'
             'left:\n'
@@ -191,22 +170,11 @@ class QuickSortMiddlePivot(object):
             )
         )
 
+        # may be needed for larger lists:
         # sys.setrecursionlimit(sys.getrecursionlimit() * 10)
 
-        """
-        retest this:
-        [0, 1, 3, 2, 4, 7, 7, 6, 9]
-        """
-        #try:
-
-        # if left_init < right:
         cls._quick(lst, left_init, right)
-        # if left < right_init:
         cls._quick(lst, left, right_init)
-
-        #except Exception as e:
-        #    import ipdb;ipdb.set_trace()
-        #    logging.error(e)
 
         return lst
 
