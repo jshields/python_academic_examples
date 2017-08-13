@@ -5,7 +5,7 @@ Not meant for practical use; for educational purposes only.
 
 The goal of this repo is to demonstrate concepts, such as what certain alogrithms do,
 using Python syntax to keep things simple,
-even though the code will be doing things that don't make sense to do in Python.
+even though the code will maybe be doing things that don't make sense to do in Python.
 
 ### Contents:
 
@@ -27,16 +27,6 @@ algorithms
 - search
   - Linear Search :white_check_mark:
   - Binary Search :white_check_mark:
-
-#### Potential future additions:
-
-datastructures (re-implemented even if they are in the standard library, just for fun)
-- Stack :x:
-- Queue :x:
-- LinkedList (single) :x:
-- DoubleLinkedList :x:
-- Binary Tree :x:
-
 
 ### Sort
 
