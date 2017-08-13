@@ -21,7 +21,7 @@ algorithms
   - Bubble Sort :white_check_mark:
   - Merge Sort :x:
   - Quicksort (Hoare partition scheme) :white_check_mark:
-  - Quicksort (middle pivot) :x:
+  - Quicksort (middle pivot) :white_check_mark:
   - Insertion Sort :white_check_mark:
   - Selection Sort :white_check_mark:
 - search
