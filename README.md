@@ -53,10 +53,13 @@ datastructures (re-implemented even if they are in the standard library, just fo
 #### Footnotes:
 
 https://www.hindawi.com/journals/isrn/2012/947634/
+
 http://www.bogotobogo.com/Algorithms/quicksort.php
+
 https://stackoverflow.com/questions/27203462/quicksort-algorithm-with-element-in-the-middle-as-pivot
 
-
 https://www.khanacademy.org/computing/computer-science/algorithms/quick-sort/a/overview-of-quicksort
+
 http://homepages.math.uic.edu/~leon/cs-mcs401-s08/handouts/quicksort.pdf
+
 http://www.geeksforgeeks.org/quick-sort/
