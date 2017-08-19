@@ -25,8 +25,11 @@ def insertion_sort(src_lst, start=0, end=None, inline=False):
         cursor = i - 1
 
         logging.debug(
-            'insertion: for looping, index at %d, current value %s, cursor at %d' % (
-                i, value, cursor
+            'insertion: looping, index at {ind}, '
+            'current value {val}, cursor at {cursor}'.format(
+                ind=i,
+                val=value,
+                cursor=cursor
             )
         )
 
@@ -37,17 +40,21 @@ def insertion_sort(src_lst, start=0, end=None, inline=False):
             # swap values with the element that the cursor is looking back towards,
             # falling through the rest of the list behind the current element
             logging.debug(
-                'insertion: while looping, shifting index of %s up by one' % lst[cursor]
+                'insertion: while looping, shifting index of {item} up by one'.format(
+                    item=lst[cursor]
+                )
             )
             lst[cursor + 1] = lst[cursor]
             cursor -= 1
             logging.debug(
-                'insertion: while looping, cursor at %d' % cursor
+                'insertion: while looping, cursor at {cursor}'.format(cursor=cursor)
             )
         # finally, insert the 'value' back into the list
         logging.debug(
-            'insertion: out of while, inserting %s back into the list at index %d' % (
-                lst[cursor + 1], cursor + 1
+            'insertion: out of while, '
+            'inserting {item} back into the list at index {ind}'.format(
+                item=lst[cursor + 1],
+                ind=cursor + 1
             )
         )
         lst[cursor + 1] = value

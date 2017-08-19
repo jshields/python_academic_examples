@@ -49,7 +49,10 @@ class QuickSort(object):
             else:
                 # swap places if the bracket trips
                 logging.debug(
-                    '_quicksort_partition swapping: %s with %s' % (lst[left], lst[right])
+                    '_quicksort_partition swapping: {left_item} with {right_item}'.format(
+                        left_item=lst[left],
+                        right_item=lst[right]
+                    )
                 )
                 tmp = lst[left]
                 lst[left] = lst[right]
@@ -61,7 +64,11 @@ class QuickSort(object):
         and elements that were swapped to the "greater than" position
         """
         logging.debug(
-            '_quicksort_partition final swap: %s with %s' % (lst[start], lst[right])
+            '_quicksort_partition final swap: '
+            'pivot {pivot_item} with {right_item}'.format(
+                pivot_item=lst[start],
+                right_item=lst[right]
+            )
         )
         tmp = lst[start]
         lst[start] = lst[right]
@@ -75,7 +82,7 @@ class QuickSort(object):
         so that the less than and greater than sides can be partitioned and sorted again,
         in `Sort._quick`
         """
-        logging.debug('pivot is %s' % right)
+        logging.debug('pivot index is {right}'.format(right=right))
         return right
 
     @classmethod
@@ -100,7 +107,7 @@ class QuickSort(object):
         """
         wrapper method
         """
-        logging.debug('quicksort starting: %s' % lst)
+        logging.debug('quicksort starting: {lst}'.format(lst=lst))
         if end is None:
             end = (len(lst) - 1)
         return cls._quick(lst, start, end)
@@ -133,7 +140,7 @@ class QuickSortMiddlePivot(object):
         """
 
         if left >= right:
-            logging.debug('single element partition: %s' % lst[left])
+            logging.debug('single element partition: {item}'.format(item=lst[left]))
             # we're at the deepest useful recursion depth, stop partitioning
             # returning the list here makes it work for 1 item lists
             return lst
@@ -142,15 +149,15 @@ class QuickSortMiddlePivot(object):
         left_init = left
         right_init = right
 
-        logging.debug('left: %d, right: %d' % (left, right))
+        logging.debug('left: {left}, right: {right}'.format(left=left, right=right))
 
         pivot_index = (left + right) // 2
         # possibly should/could be this?
         # pivot_index = left + (right-left) // 2
 
-        logging.debug('pivot index: %s' % pivot_index)
+        logging.debug('pivot index: {ind}'.format(ind=pivot_index))
         pivot_value = lst[pivot_index]
-        logging.debug('pivot value: %s' % pivot_value)
+        logging.debug('pivot value: {val}'.format(val=pivot_value))
 
         """
         sometimes elements are swapped with themselves,
@@ -167,8 +174,12 @@ class QuickSortMiddlePivot(object):
 
             if left <= right:
                 # swap
-                logging.debug('before swap: %s' % lst)
-                logging.debug('swapping: %s with %s' % (lst[left], lst[right]))
+                logging.debug('before swap: {lst}'.format(lst=lst))
+                logging.debug('swapping: {left_item} with {right_item}'.format(
+                        left_item=lst[left],
+                        right_item=lst[right]
+                    )
+                )
 
                 cls._swap(lst, left, right)
 
