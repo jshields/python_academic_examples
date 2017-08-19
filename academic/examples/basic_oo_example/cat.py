@@ -1,6 +1,6 @@
 #!/usr/bin/python
-# jshields
-from animal import Animal
+
+from examples.basic_oo_example.animal import Animal
 
 
 class Cat(Animal):
@@ -10,6 +10,9 @@ class Cat(Animal):
     _sound = 'Meow!'  # used by Animal's speak method
 
     def scratch(self, target):
-        result = '%s the cat scratches %s' % (self.name, str(target))
+        result = '{animal_name} the cat scratches {target}'.format(
+            animal_name=self.name,
+            target=str(target)
+        )
         print(result)
         return result

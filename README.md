@@ -13,7 +13,7 @@ basic Object Oriented example
 - Animal :white_check_mark:
 - Cat :white_check_mark:
 - Dog :white_check_mark:
-- Unicdoe animal emoji methods :white_check_mark:
+- Unicode animal emoji methods :white_check_mark:
 - associated unit tests :white_check_mark:
 
 algorithms
@@ -28,17 +28,18 @@ algorithms
   - Linear Search :white_check_mark:
   - Binary Search :white_check_mark:
 
-### Sort
 
-#### Usage:
+### Running unit tests:
+`unittest` CLI from inside package:
+
+    python -m unittest
+
+### `sort` usage:
 
     from examples.sort.quick import QuickSortMiddlePivot
     QuickSortMiddlePivot.quick([2,6,1,7,3,2])
 
-#### Running unit tests:
-`unittest` CLI from inside package:
 
-    python -m unittest tests.sort
 
 #### Footnotes:
 

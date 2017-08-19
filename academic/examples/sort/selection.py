@@ -1,6 +1,10 @@
 import logging
 
-logging.basicConfig(filename='selection_sort.log', format='%(asctime)s %(message)s', level=logging.DEBUG)
+logging.basicConfig(
+    filename='selection_sort.log',
+    format='%(asctime)s %(message)s',
+    level=logging.DEBUG
+)
 
 
 def selection_sort(lst):

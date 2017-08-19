@@ -13,17 +13,16 @@ class MergeSort(object):
         rightside_start = leftside_end + 1
         # TODO
 
-
     @classmethod
-    def _mergesort_recurse(cls, lst, start, end, tmp):
+    def _mergesort_recurse(cls, lst, tmp, start, end):
         # sorting is done when we reach a single list element to sort
         if start < end:
-            _mergesort_recurse(lst, tmp, start, mid)
-            _mergesort_recurse(lst, tmp, mid, end)
-            _mergesort_merge(lst, tmp, start, end)
+            cls._mergesort_recurse(lst, tmp, start, mid)
+            cls._mergesort_recurse(lst, tmp, mid, end)
+            cls._mergesort_merge(lst, tmp, start, end)
 
     @classmethod
-    def merge(cls, lst):
+    def sort(cls, lst):
         """
         Merge sort implementation
 
@@ -33,10 +32,12 @@ class MergeSort(object):
         Calling merge sort happens recursively.
 
         From the top frame's perspective, each list half is
-        "magically" sorted and then they are merged back together such that the entire list will be sorted.
+        "magically" sorted and then they are merged back together
+        such that the entire list will be sorted.
         Underneath, the list halves have the same thing done to them:
         they are split, sorted, and merged back together.
-        So the "magic" sort when looking from the perspective of the most shallow recursive frame,
+        So the "magic" sort when,
+        looking from the perspective of the most shallow recursive frame,
         is actually merge sort itself.
 
         On the lowest depth recursive frame,
@@ -46,7 +47,8 @@ class MergeSort(object):
         The splitting is done inline, by index,
         rather than creating new lists for each half, each time.
         """
+        raise NotImplementedError()
         start = 0
         end = len(lst) - 1
         tmp = []
-        _mergesort_recurse(lst, tmp, start, end)
+        cls._mergesort_recurse(lst, tmp, start, end)

@@ -41,7 +41,6 @@ class TestSort(unittest.TestCase):
                 sorted(lst)
             )
 
-
     @unittest.skip('Not Implemented')
     def test_merge_sort(self):
         for lst in self.jumbled_int_lists:

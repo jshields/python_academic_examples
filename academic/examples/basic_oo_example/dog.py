@@ -1,6 +1,6 @@
 #!/usr/bin/python
-# jshields
-from animal import Animal
+
+from examples.basic_oo_example.animal import Animal
 
 
 class Dog(Animal):

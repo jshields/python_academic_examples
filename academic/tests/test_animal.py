@@ -1,15 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """Tests for basic_oo_example"""
-import logging
 import unittest
-from unittest import TestCase
+
 from examples.basic_oo_example.animal import Animal
 from examples.basic_oo_example.dog import Dog
 from examples.basic_oo_example.cat import Cat
 
 
-class TestAnimal(TestCase):
+class TestAnimal(unittest.TestCase):
     """Tests for basic_oo_example.animal Animal"""
 
     def setUp(self):
@@ -36,7 +35,7 @@ class TestAnimal(TestCase):
         self.assertEqual(self.bigfoot.name, 'Sasquatch')
 
 
-class TestDog(TestCase):
+class TestDog(unittest.TestCase):
     """Tests for basic_oo_example.dog Dog"""
 
     def setUp(self):
@@ -68,7 +67,7 @@ class TestDog(TestCase):
         self.assertEqual(self.rover.name, 'Champ')
 
 
-class TestCat(TestCase):
+class TestCat(unittest.TestCase):
     """Tests for basic_oo_example.cat Cat"""
 
     def setUp(self):
@@ -83,14 +82,14 @@ class TestCat(TestCase):
         self.assertFalse(repr(self.whiskers) is str(self.whiskers))
         # but repr should still return something of type string
         self.assertTrue(
-            isinstance(repr(self.whiskers), basestring)
+            isinstance(repr(self.whiskers), str)
         )
 
     def test_speak(self):
         # make sure a string returns on speak
         meow = self.whiskers.speak()
         self.assertTrue(
-            isinstance(meow, basestring)
+            isinstance(meow, str)
         )
 
     def test_emoji(self):
@@ -108,7 +107,7 @@ class TestCat(TestCase):
         # make sure that the cat scratch method returns a string
         scr = self.whiskers.scratch('the scratching post')
         self.assertTrue(
-            isinstance(scr, basestring)
+            isinstance(scr, str)
         )
 
 

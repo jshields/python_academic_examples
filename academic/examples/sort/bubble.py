@@ -1,5 +1,4 @@
 
-
 def bubble_sort(lst):
     """Bubble sort implementation"""
     swapping = True

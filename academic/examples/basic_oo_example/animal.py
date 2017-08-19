@@ -1,9 +1,13 @@
 #!/usr/bin/python
 """animal module"""
-# jshields
 import logging
 
-logging.basicConfig(filename='animal.log', format='%(asctime)s %(message)s', level=logging.DEBUG)
+
+logging.basicConfig(
+    filename='animal.log',
+    format='%(asctime)s %(message)s',
+    level=logging.DEBUG,
+)
 
 
 class Animal(object):
@@ -17,17 +21,22 @@ class Animal(object):
         self._breed = breed
         self._color = color
 
-        logging.info("%s initialized" % self)
+        logging.info('{obj} initialized'.format(obj=self))
 
     def __repr__(self):
-        return u'<Class %s name=%s breed=%s color=%s emoji=%s >' % (
-            self.__class__.__name__,
-            self._name, self._breed, self._color,
-            self._emoji.encode('unicode_escape')
+        return '<{class_name} name={name} breed={breed} color={color} >'.format(
+            class_name=self.__class__.__name__,
+            name=self._name,
+            breed=self._breed,
+            color=self._color,
         )
 
     def __str__(self):
-        return u'%s the %s %s' % (self._name, self._color, self._breed)
+        return '{name} the {color} {breed}'.format(
+            name=self._name,
+            color=self._color,
+            breed=self._breed
+        )
 
     def speak(self):
         """
@@ -38,7 +47,9 @@ class Animal(object):
             print(self._sound)
             return self._sound
         except AttributeError:
-            raise Exception('No _sound defined for this animal! (%s)' % self)
+            raise NotImplementedError(
+                'No _sound defined for this animal! ({obj})'.format(obj=self)
+            )
 
     @property
     def name(self):

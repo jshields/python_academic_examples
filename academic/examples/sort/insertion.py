@@ -1,7 +1,11 @@
 import logging
 import copy
 
-logging.basicConfig(filename='insertion_sort.log', format='%(asctime)s %(message)s', level=logging.DEBUG)
+logging.basicConfig(
+    filename='insertion_sort.log',
+    format='%(asctime)s %(message)s',
+    level=logging.DEBUG
+)
 
 
 def insertion_sort(src_lst, start=0, end=None, inline=False):
@@ -32,12 +36,17 @@ def insertion_sort(src_lst, start=0, end=None, inline=False):
             # starting from the element of current 'value',
             # swap values with the element that the cursor is looking back towards,
             # falling through the rest of the list behind the current element
-            logging.debug('insertion: while looping, shifting index of %s up by one' % lst[cursor])
+            logging.debug(
+                'insertion: while looping, shifting index of %s up by one' % lst[cursor]
+            )
             lst[cursor + 1] = lst[cursor]
             cursor -= 1
-            logging.debug('insertion: while looping, cursor at %d' % cursor)
+            logging.debug(
+                'insertion: while looping, cursor at %d' % cursor
+            )
         # finally, insert the 'value' back into the list
-        logging.debug('insertion: out of while, inserting %s back into the list at index %d' % (
+        logging.debug(
+            'insertion: out of while, inserting %s back into the list at index %d' % (
                 lst[cursor + 1], cursor + 1
             )
         )
