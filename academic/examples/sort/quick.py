@@ -183,7 +183,7 @@ class QuickSortMiddlePivot(object):
 
                 cls._swap(lst, left, right)
 
-                logging.debug('after swap: %s' % lst)
+                logging.debug('after swap: {lst}'.format(lst=lst))
                 # increment left and right again after swap changes list
                 left += 1
                 right -= 1
@@ -191,10 +191,11 @@ class QuickSortMiddlePivot(object):
         logging.debug(
             'partition/recurse\n'
             'left:\n'
-            '%s\n'
+            '{left}\n'
             'right:\n'
-            '%s' % (
-                lst[left_init:(right + 1)], lst[left:(right_init + 1)]
+            '{right}'.format(
+                left=lst[left_init:(right + 1)],
+                right=lst[left:(right_init + 1)]
             )
         )
 
@@ -211,7 +212,7 @@ class QuickSortMiddlePivot(object):
         """
         wrapper method
         """
-        logging.debug('quicksort middle pivot starting: %s' % lst)
+        logging.debug('quicksort middle pivot starting: {lst}'.format(lst=lst))
         if end is None:
             end = (len(lst) - 1)
         return cls._quick(lst, start, end)
