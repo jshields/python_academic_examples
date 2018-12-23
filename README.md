@@ -32,7 +32,10 @@ algorithms
 ### Running unit tests:
 `unittest` CLI from inside package:
 
+    # all tests
     python -m unittest
+    # individual test
+    python -m unittest tests.test_fibonacci
 
 ### `sort` usage:
 
