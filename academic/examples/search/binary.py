@@ -14,15 +14,13 @@ def binary_search(item, lst):
     """
     Binary search for an item in an ordered list.
     Returns an index in the list or False if not found.
+
+    :param item int: number to search for in the list.
+    :param lst list: sorted list of ints, in ascending order.
+    :return: index of item, or False if not found
     """
-    tmp = sorted(lst)
-    if lst != tmp:
-        raise ValueError(
-            'Unsorted list passed to binary search.'
-            'Please sort list so returned index will be meaningful.'
-        )
     bottom = 0
-    top = len(tmp) - 1
+    top = len(lst) - 1
     while bottom <= top:
         middle = (bottom + top) // 2
         # middle, greater half or lesser half?

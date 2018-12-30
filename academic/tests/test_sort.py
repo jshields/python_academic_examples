@@ -10,6 +10,7 @@ class TestSort(unittest.TestCase):
 
     def setUp(self):
         self.jumbled_int_lists = (
+            [100, 3, 47, 14, 2, 5, 8, 32, 9, 10, 63, 33, 6, 2, 7, 8, 2, 3, 4, 5, 22, 78],
             [9, 3, 1, 6, 4, 7, 7, 2, 0],
             [0, 1, 3, 2, 4, 7, 7, 6, 9],
             [2, 6, 1, 7, 7, 7, 7, 3, 2],
@@ -34,14 +35,12 @@ class TestSort(unittest.TestCase):
             )
 
     def test_quick_sort2(self):
-
         for lst in self.jumbled_int_lists:
             self.assertEqual(
                 quick.QuickSortMiddlePivot.quick(lst),
                 sorted(lst)
             )
 
-    @unittest.skip('Not Implemented')
     def test_merge_sort(self):
         for lst in self.jumbled_int_lists:
             self.assertEqual(

@@ -1,54 +1,73 @@
+"""
+TODO iterative bottom-up solution https://en.wikipedia.org/wiki/Merge_sort
+"""
+import logging
+
+logging.basicConfig(
+    filename='merge_sort.log',
+    # format='%(asctime)s %(message)s',
+    level=logging.DEBUG
+)
 
 
-class MergeSort(object):
+def _merge_sorted_lists(left_lst, right_lst):
+    if not left_lst:
+        return right_lst
+    if not right_lst:
+        return left_lst
 
-    @classmethod
-    def _mergesort_merge(cls, start, end):
-        """
-        Merge two sorted halves of a list back together
-        :param list start: list left half, already sorted
-        :param list end: list right half, already sorted
-        """
-        leftside_end = (start + end) // 2
-        rightside_start = leftside_end + 1
-        # TODO
+    left_index = right_index = 0  # use two "pointers" for positions in each input list
+    target_length = len(left_lst) + len(right_lst)
+    result = []
+    while len(result) < target_length:
+        if left_lst[left_index] < right_lst[right_index]:
+            # left item we point at is less, it goes in first
+            result.append(left_lst[left_index])
+            left_index += 1
+        else:
+            result.append(right_lst[right_index])
+            right_index += 1
 
-    @classmethod
-    def _mergesort_recurse(cls, lst, tmp, start, end):
-        # sorting is done when we reach a single list element to sort
-        if start < end:
-            cls._mergesort_recurse(lst, tmp, start, mid)
-            cls._mergesort_recurse(lst, tmp, mid, end)
-            cls._mergesort_merge(lst, tmp, start, end)
+        # check if one of the lists being merged has been exhausted
+        if right_index == len(right_lst):
+            # if right is exhausted, add in the rest of the left list,
+            # starting from its "pointer" `left_index`
+            result.extend(left_lst[left_index:])
+            break
+        elif left_index == len(left_lst):
+            # if left is exhausted, add in what's left of the right
+            result.extend(right_lst[right_index:])
+            break
 
-    @classmethod
-    def sort(cls, lst):
-        """
-        Merge sort implementation
+    logging.debug('Merged {left_lst} and {right_lst}, returning {result}'.format(
+        left_lst=left_lst, right_lst=right_lst, result=result))
+    return result
 
-        Split the list in half, call merge sort on each half,
-        then merge the sorted halves back together.
 
-        Calling merge sort happens recursively.
+def _merge_sort_recurse(lst):
+    lst_len = len(lst)
 
-        From the top frame's perspective, each list half is
-        "magically" sorted and then they are merged back together
-        such that the entire list will be sorted.
-        Underneath, the list halves have the same thing done to them:
-        they are split, sorted, and merged back together.
-        So the "magic" sort when,
-        looking from the perspective of the most shallow recursive frame,
-        is actually merge sort itself.
+    if lst_len in (0, 1):
+        # empty or single item is considered sorted
+        return lst
 
-        On the lowest depth recursive frame,
-        we end up with lists containing a single item,
-        and that's when we stop calling merge sort / stop recursing.
+    # find middle
+    # (using floored division here is fine)
+    mid = lst_len // 2
 
-        The splitting is done inline, by index,
-        rather than creating new lists for each half, each time.
-        """
-        raise NotImplementedError()
-        start = 0
-        end = len(lst) - 1
-        tmp = []
-        cls._mergesort_recurse(lst, tmp, start, end)
+    # split
+    left = lst[:mid]  # slice start to mid (not inclusive)
+    right = lst[mid:]  # slice mid to end
+
+    # merge sort left
+    left_sorted = _merge_sort_recurse(left)
+
+    # merge sort right
+    right_sorted = _merge_sort_recurse(right)
+
+    # merge the halves together
+    return _merge_sorted_lists(left_sorted, right_sorted)
+
+
+def merge_sort(lst):
+    return _merge_sort_recurse(lst)
