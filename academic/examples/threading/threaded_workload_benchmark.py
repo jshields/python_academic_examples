@@ -17,7 +17,7 @@ from multiprocessing.dummy import Pool as ThreadPool
 
 
 urls = [
-    'http://www.python.org',
+    'http://www.github.com',
     'http://www.google.com',
     'http://stackoverflow.com',
 ]
@@ -52,6 +52,7 @@ def threaded_network_bound_work():
     return results
 
 
+# TODO
 def processed_cpu_bound_work():
     pass
 
