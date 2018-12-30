@@ -1,4 +1,13 @@
 
+"""
+DRAFT
+
+Slightly different approach that avoids making new lists,
+instead using indices to virtually divide the original list
+
+https://youtu.be/KF2j-9iSf4Q
+"""
+
 
 class MergeSort(object):
 
