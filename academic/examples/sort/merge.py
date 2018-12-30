@@ -5,7 +5,6 @@ import logging
 
 logging.basicConfig(
     filename='merge_sort.log',
-    # format='%(asctime)s %(message)s',
     level=logging.DEBUG
 )
 
