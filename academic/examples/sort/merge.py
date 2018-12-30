@@ -10,6 +10,7 @@ logging.basicConfig(
 
 
 def _merge_sorted_lists(left_lst, right_lst):
+    # credit to https://medium.com/@amirziai/merge-sort-walkthrough-with-code-in-python-e4f76d90a4ea
     if not left_lst:
         return right_lst
     if not right_lst:
