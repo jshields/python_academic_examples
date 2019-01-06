@@ -166,7 +166,7 @@ class QuickSortMiddlePivot(object):
         logging.debug('left: {left}, right: {right}'.format(left=left, right=right))
 
         pivot_index = (left + right) // 2
-        # possibly should/could be this?
+        # Could be this to prevent integer overflow:
         # pivot_index = left + (right-left) // 2
 
         logging.debug('pivot index: {ind}'.format(ind=pivot_index))
@@ -213,7 +213,8 @@ class QuickSortMiddlePivot(object):
             )
         )
 
-        # may be needed for larger lists:
+        # May need iterative approach for larger lists due to recursion limit
+        # Recursion limit can be increased but not ideal for stack size/speed:
         # sys.setrecursionlimit(sys.getrecursionlimit() * 10)
 
         cls._quick(lst, left_init, right)
