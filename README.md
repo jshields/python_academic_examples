@@ -36,7 +36,7 @@ other curiosities:
 
 
 ### Running unit tests:
-`unittest` CLI from inside package (academic/):
+`unittest` CLI:
 
     # all tests
     python -m unittest
