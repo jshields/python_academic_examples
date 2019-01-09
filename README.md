@@ -28,11 +28,11 @@ algorithms
   - Linear Search :white_check_mark:
   - Binary Search :white_check_mark:
 
-other curiosities:
-    - ackermann
-    - Fibonacci Sequence (implementations using various approaches)
-    - some threading examples.
-        May want to move these out into their own repo demonstrating race conditions
+other:
+- ackermann
+- Fibonacci Sequence (implementations using various approaches)
+- some threading examples.
+  - May want to move these out into their own repo demonstrating race conditions
 
 
 ### Running unit tests:
