@@ -6,7 +6,14 @@ from examples.sort import bubble, insertion, merge, quick, selection
 
 
 class TestSort(unittest.TestCase):
-    """Sort unit tests"""
+    """
+    Sort unit tests
+
+    These assertions are a bit precarious due to inline sorting algorithms
+    which affect the same object we compare to,
+    but should work to detect differences in sorting as compared to what is returned from
+    the `sorted` function since it does not operate inline
+    """
 
     def setUp(self):
         self.jumbled_int_lists = (
@@ -50,8 +57,18 @@ class TestSort(unittest.TestCase):
 
     def test_bubble_sort(self):
         for lst in self.jumbled_int_lists:
+            bubble.bubble_sort(lst)
             self.assertEqual(
-                bubble.bubble_sort(lst),
+                lst,
+                sorted(lst)
+            )
+
+    def test_bubble_sort_optimized(self):
+        for lst in self.jumbled_int_lists:
+            # sort the list inline
+            bubble.bubble_sort_optimized(lst)
+            self.assertEqual(
+                lst,
                 sorted(lst)
             )
 

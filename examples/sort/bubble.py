@@ -32,10 +32,8 @@ def bubble_sort(lst):
                 tmp = lst[i]
                 lst[i] = lst[i + 1]
                 lst[i + 1] = tmp
-    return lst
 
 
-# TODO test this, then add the next optimization
 def bubble_sort_optimized(lst):
     """
     Bubble sort is not efficient,
@@ -67,10 +65,11 @@ def bubble_sort_optimized(lst):
     (extra -1 accounts for the fact that
     we check the element in front of the one we're swapping)
 
-    The next optimization after the one above is to also break if no swap in inner loop:
+    The next optimization after the one above is to also break if no swap in inner loop,
+    similar to the original:
     https://www.geeksforgeeks.org/bubble-sort/
 
-    However, an optimization that subsumes this optimization is possible next:
+    However, an optimization that subsumes this optimization is possible:
     "after every pass, all elements after the last swap are sorted, and do not need to be checked again"
     TODO skip over already swapped elements on the next pass by setting `newn`
     """
@@ -85,3 +84,6 @@ def bubble_sort_optimized(lst):
                 tmp = lst[j]
                 lst[j] = lst[j+1]
                 lst[j+1] = tmp
+
+    # this works inline, so perhaps returning the list here would be misleading.
+    # following the pattern of python's `[].sort` versus `sorted`, don't return anything
