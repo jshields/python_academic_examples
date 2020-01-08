@@ -14,7 +14,8 @@ sum([6, 10]) ->
 
 def recursive_sum(lst, num=0):
     """
-    sum a list of integers using recursion
+    Sum a list of integers using recursion.
+    This serves as a simple example of a recursive function.
 
     :param lst list: List of integers to add together.
         Only necessary top level argument.
