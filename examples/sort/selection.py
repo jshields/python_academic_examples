@@ -27,7 +27,7 @@ def selection_sort(lst):
                 less_item_index = i
         else:
             # after list is consumed,
-            # swap least value item we "selected" to the top
+            # swap least value item we "selected" to its ordered position
             tmp = lst[target_index]
             lst[target_index] = less_item
             lst[less_item_index] = tmp
