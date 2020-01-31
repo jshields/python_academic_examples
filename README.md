@@ -1,6 +1,8 @@
 # python academic examples
 Work in Progress
 
+Python 2.7
+
 Not meant for practical use; for educational purposes only.
 
 The goal of this repo is to demonstrate concepts, such as what certain alogrithms do,
