@@ -1,7 +1,6 @@
 # python academic examples
-Work in Progress
 
-Python 2.7
+Python 2.7 (TODO: upgrade to Python 3)
 
 Not meant for practical use; for educational purposes only.
 
